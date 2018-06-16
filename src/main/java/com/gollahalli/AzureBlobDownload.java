@@ -1,3 +1,5 @@
+package com.gollahalli;
+
 public class AzureBlobDownload {
 
     private String accountKey;
