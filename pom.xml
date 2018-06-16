@@ -40,6 +40,7 @@
                     <sourceFileExcludes>
                         <exclude>com/gollahalli/azure/Main.java</exclude>
                     </sourceFileExcludes>
+                    <additionalJOption>-notimestamp</additionalJOption>
                 </configuration>
             </plugin>
         </plugins>
