@@ -1,4 +1,4 @@
-package com.gollahalli;
+package com.gollahalli.azure;
 
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageCredentialsAccountAndKey;
