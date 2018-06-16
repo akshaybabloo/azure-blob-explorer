@@ -4,15 +4,46 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gollahalli</groupId>
+    <groupId>com.gollahalli.azure</groupId>
     <artifactId>azure-blob-explorer</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
 
-    <url>http://maven.apache.org</url>
+    <name>Azure File Explorer</name>
+    <description>Upload and Download your files to Azure Blob easily.</description>
+    <url>https://github.com/akshaybabloo/azure-blob-explorer</url>
+
+    <scm>
+        <url>scm:git:https://github.com/akshaybabloo/azure-blob-explorer</url>
+        <connection>scm:git:git://github.com/akshaybabloo/azure-blob-explorer.git</connection>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://raw.githubusercontent.com/akshaybabloo/azure-blob-explorer/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <sourceFileExcludes>
+                        <exclude>com/gollahalli/azure/Main.java</exclude>
+                    </sourceFileExcludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <dependencies>
         <dependency>
