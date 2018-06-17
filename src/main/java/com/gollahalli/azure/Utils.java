@@ -51,7 +51,7 @@ public class Utils {
      *      Name of the container.
      * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
      */
-    public boolean conatinerExists(String containerName){
+    public boolean containerExists(String containerName){
         return false;
     }
 }

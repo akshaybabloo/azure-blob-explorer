@@ -60,7 +60,9 @@ public class AzureBlobUpload {
         CloudBlobClient cloudBlobClient = null;
         CloudBlobContainer cloudBlobContainer = null;
 
-        cloudBlobClient = account.createCloudBlobClient();
+        if (!utils.containerExists(this.containerName)) {
+            utils.createContainer(this.containerName);
+        }
 
         return "";
 
