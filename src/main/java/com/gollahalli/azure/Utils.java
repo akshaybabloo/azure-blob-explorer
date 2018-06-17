@@ -1,6 +1,7 @@
 package com.gollahalli.azure;
 
 import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,6 +46,18 @@ public class Utils {
     }
 
     /**
+     * Creates a container.
+     *
+     * @param container
+     *      {@link CloudBlobContainer} object.
+     * @return
+     *      Name of the container.
+     */
+    public String createContainer(CloudBlobContainer container){
+        return null;
+    }
+
+    /**
      * Checks if a containers exists with the name given.
      *
      * @param containerName
@@ -52,6 +65,17 @@ public class Utils {
      * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
      */
     public boolean containerExists(String containerName){
+        return false;
+    }
+
+    /**
+     * Checks if a containers exists with the name given.
+     *
+     * @param container
+     *      {@link CloudBlobContainer} object.
+     * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
+     */
+    public boolean containerExists(CloudBlobContainer container){
         return false;
     }
 }
