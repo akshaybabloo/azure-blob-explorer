@@ -46,14 +46,14 @@ public class Utils {
     /**
      * List all the containers in the account provided.
      *
-     * @param container {@link CloudBlobClient} object.
+     * @param blobClient {@link CloudBlobClient} object.
      * @return A list of containers.
      */
-    public static List<String> listContainers(CloudBlobClient container) {
+    public static List<String> listContainers(CloudBlobClient blobClient) {
 
         List<String> uris = new ArrayList<String>();
 
-        for (CloudBlobContainer blobItem : container.listContainers()) {
+        for (CloudBlobContainer blobItem : blobClient.listContainers()) {
             uris.add(blobItem.getName());
         }
         return uris;
