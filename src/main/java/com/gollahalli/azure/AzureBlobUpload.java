@@ -6,6 +6,7 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import com.sun.istack.internal.Nullable;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +44,7 @@ public class AzureBlobUpload {
     }
 
     /**
-     *  Implements uploading files to Azure containers with HTTPS as <code>true</code> by default.
+     * Implements uploading files to Azure containers with HTTPS as <code>true</code> by default.
      *
      * @param accountName   Account name from your <strong>Access Keys</strong>.
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
@@ -55,15 +56,16 @@ public class AzureBlobUpload {
 
 
     /**
-     * Upload a single file to Azure blob.
+     * Upload a single file to Azure blob and specify the path to the blob folder.
      *
      * @param pathFileName Absolute path with file name.
+     * @param blobPath     Path of the blob folder.
      * @return URL of the uploaded file.
      * @throws URISyntaxException If an invalid account name is provided.
      * @throws StorageException   Storage error.
      * @throws IOException        If the file does not exist.
      */
-    public URI uploadFromFile(String pathFileName) throws URISyntaxException, StorageException, IOException {
+    public URI uploadFromFile(String pathFileName, @Nullable String blobPath) throws URISyntaxException, StorageException, IOException {
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
@@ -78,11 +80,29 @@ public class AzureBlobUpload {
         String fileName = FilenameUtils.getName(pathFileName);
         pathFileName = FilenameUtils.normalize(pathFileName);
 
-        CloudBlockBlob blob = cloudBlobContainer.getBlockBlobReference(fileName);
+        CloudBlockBlob blob;
+        if (blobPath != null) {
+            blob = cloudBlobContainer.getBlockBlobReference(blobPath + fileName);
+        } else {
+            blob = cloudBlobContainer.getBlockBlobReference(fileName);
+        }
+
         blob.uploadFromFile(pathFileName);
 
         return blob.getUri();
+    }
 
+    /**
+     * Upload a single file to the root of Azure container.
+     *
+     * @param pathFileName Absolute path with file name.
+     * @return URL of the uploaded file.
+     * @throws URISyntaxException If an invalid account name is provided.
+     * @throws StorageException   Storage error.
+     * @throws IOException        If the file does not exist.
+     */
+    public URI uploadFromFile(String pathFileName) throws URISyntaxException, StorageException, IOException {
+        return uploadFromFile(pathFileName, null);
     }
 
 
