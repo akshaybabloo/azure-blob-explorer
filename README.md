@@ -26,10 +26,10 @@ import com.gollahalli.azure.AzureBlobUpload;
 AzureBlobUpload azureBlobUpload = new AzureBlobUpload("account name", "account key", "container name");
 
 // Single file.
-azureBlobUpload.upload("fileName.txt");
+azureBlobUpload.uploadFromFile("path/to/file.txt");
 
-// Folders
-azureBlobUpload.recursiveUpload("./folderName/");
+// Folder
+azureBlobUpload.uploadFromFolder("path/to/folder/");
 ```
 
 To Download a file or a folder:
@@ -40,8 +40,8 @@ import com.gollahalli.azure.AzureBlobDownload;
 AzureBlobDownload azureBlobDownload = new AzureBlobDownload("account name", "account key", "container name");
 
 // Single file.
-azureBlobDownload.download("fileName.txt");
+azureBlobDownload.downloadFile("fileName.txt");
 
-// Folders
-azureBlobUpload.recursiveDownload("./folderName/");
+// Folder
+azureBlobUpload.downloadFolder("./folderName/");
 ```

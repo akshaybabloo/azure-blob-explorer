@@ -10,11 +10,11 @@ public class AzureBlobDownload {
         this.accountName = accountName;
     }
 
-    public void download(String fileName){
+    public void downloadFile(String fileName){
 
     }
 
-    public void recursiveDownload(String folderName){
+    public void downloadFolder(String folderName){
 
     }
 }

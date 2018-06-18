@@ -52,7 +52,7 @@ public class AzureBlobUpload {
      * @return URL of the uploaded file.
      * @throws URISyntaxException If an invalid account name is provided.
      */
-    public String upload(String path) throws URISyntaxException {
+    public String uploadFromFile(String pathFileName) throws URISyntaxException, StorageException, IOException {
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
@@ -73,7 +73,7 @@ public class AzureBlobUpload {
      * @param folderPath Absolute path to a folder.
      * @return URL of the uploaded location.
      */
-    public String recursiveUpload(String folderPath) {
+    public String uploadFromFolder(String folderPath) {
         return "";
     }
 
