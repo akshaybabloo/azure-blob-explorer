@@ -2,11 +2,15 @@ package com.gollahalli.azure;
 
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageCredentialsAccountAndKey;
+import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
@@ -24,7 +28,7 @@ public class AzureBlobUpload {
     /**
      * @param accountName   Account name from your <strong>Access Keys</strong>.
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
-     * @param containerName Container name you want to upload or create.
+     * @param containerName Container name you want to uploadFromFile or create.
      * @param useHttps      <code>true</code> to use HTTPS to connect to the storage service endpoints;
      *                      otherwise, <code>false</code>. Defaults to <code>true</code>.
      */
@@ -38,7 +42,7 @@ public class AzureBlobUpload {
     /**
      * @param accountName   Account name from your <strong>Access Keys</strong>.
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
-     * @param containerName Container name you want to upload or create.
+     * @param containerName Container name you want to uploadFromFile or create.
      */
     public AzureBlobUpload(String accountName, String accountKey, String containerName) {
         this(accountName, accountKey, containerName, true);
@@ -48,20 +52,22 @@ public class AzureBlobUpload {
     /**
      * Upload a single file to Azure blob.
      *
-     * @param path An absolute path to the file.
+     * @param pathFileName Absolute path to the file.
      * @return URL of the uploaded file.
      * @throws URISyntaxException If an invalid account name is provided.
+     * @throws StorageException   Storage error.
+     * @throws IOException        If the file does not exist.
      */
     public String uploadFromFile(String pathFileName) throws URISyntaxException, StorageException, IOException {
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
 
-        CloudBlobClient cloudBlobClient = null;
-        CloudBlobContainer cloudBlobContainer = null;
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
 
-        if (!utils.containerExists(this.containerName)) {
-            utils.createContainer(this.containerName);
+        if (!Utils.containerExists(cloudBlobClient, this.containerName)) {
+            Utils.createContainer(cloudBlobContainer);
         }
 
         return "";
