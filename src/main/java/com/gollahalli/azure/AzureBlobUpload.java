@@ -6,7 +6,6 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
-import com.sun.istack.internal.Nullable;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,7 +64,7 @@ public class AzureBlobUpload {
      * @throws StorageException   Storage error.
      * @throws IOException        If the file does not exist.
      */
-    public URI uploadFromFile(String pathFileName, @Nullable String blobPath) throws URISyntaxException, StorageException, IOException {
+    public URI uploadFromFile(String pathFileName, String blobPath) throws URISyntaxException, StorageException, IOException {
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
