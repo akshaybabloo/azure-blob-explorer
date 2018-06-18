@@ -87,10 +87,25 @@ public class AzureBlobUpload {
 
 
     /**
+     *  Do a recursive upload to the folder path provided.
+     *
      * @param folderPath Absolute path to a folder.
      * @return URL of the uploaded location.
+     * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
+     * @throws StorageException If container is not found.
      */
-    public String uploadFromFolder(String folderPath) {
+    public String uploadFromFolder(String folderPath) throws URISyntaxException, StorageException {
+        // TODO: Remove redundant code.
+
+        StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
+        CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+
+        if (!Utils.containerExists(cloudBlobClient, this.containerName)) {
+            Utils.createContainer(cloudBlobContainer);
+        }
         return "";
     }
 
