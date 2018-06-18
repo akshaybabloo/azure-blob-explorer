@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
@@ -26,6 +27,8 @@ public class AzureBlobUpload {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
+     * Implements uploading files to Azure containers.
+     *
      * @param accountName   Account name from your <strong>Access Keys</strong>.
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
      * @param containerName Container name you want to uploadFromFile or create.
@@ -40,6 +43,8 @@ public class AzureBlobUpload {
     }
 
     /**
+     *  Implements uploading files to Azure containers with HTTPS as <code>true</code> by default.
+     *
      * @param accountName   Account name from your <strong>Access Keys</strong>.
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
      * @param containerName Container name you want to uploadFromFile or create.
@@ -52,13 +57,13 @@ public class AzureBlobUpload {
     /**
      * Upload a single file to Azure blob.
      *
-     * @param pathFileName Absolute path to the file.
+     * @param pathFileName Absolute path with file name.
      * @return URL of the uploaded file.
      * @throws URISyntaxException If an invalid account name is provided.
      * @throws StorageException   Storage error.
      * @throws IOException        If the file does not exist.
      */
-    public String uploadFromFile(String pathFileName) throws URISyntaxException, StorageException, IOException {
+    public URI uploadFromFile(String pathFileName) throws URISyntaxException, StorageException, IOException {
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
@@ -70,7 +75,13 @@ public class AzureBlobUpload {
             Utils.createContainer(cloudBlobContainer);
         }
 
-        return "";
+        String fileName = FilenameUtils.getName(pathFileName);
+        pathFileName = FilenameUtils.normalize(pathFileName);
+
+        CloudBlockBlob blob = cloudBlobContainer.getBlockBlobReference(fileName);
+        blob.uploadFromFile(pathFileName);
+
+        return blob.getUri();
 
     }
 
