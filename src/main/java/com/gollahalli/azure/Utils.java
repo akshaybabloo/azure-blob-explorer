@@ -46,7 +46,7 @@ public class Utils {
     /**
      * List all the containers in the account provided.
      *
-     * @param container {@link CloudBlobContainer} object.
+     * @param container {@link CloudBlobClient} object.
      * @return A list of containers.
      */
     public static List<String> listContainers(CloudBlobClient container) {
@@ -74,6 +74,7 @@ public class Utils {
      *
      * @param container {@link CloudBlobContainer} object.
      * @return Name of the container.
+     * @throws StorageException If no container is found.
      */
     public static String createContainer(CloudBlobContainer container) throws StorageException {
 
@@ -96,6 +97,7 @@ public class Utils {
      * Checks if a containers exists with the name given.
      *
      * @param container {@link CloudBlobContainer} object.
+     * @param containerName Name of the container to check.
      * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
      */
     public static boolean containerExists(CloudBlobContainer container, String containerName) {
@@ -105,7 +107,8 @@ public class Utils {
     /**
      * Checks if a containers exists with the name given.
      *
-     * @param container {@link CloudBlobContainer} object.
+     * @param cloudBlobClient {@link CloudBlobClient} object.
+     * @param containerName Name of the container to check.
      * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
      */
     public static boolean containerExists(CloudBlobClient cloudBlobClient, String containerName) {
