@@ -6,16 +6,26 @@
 
     <groupId>com.gollahalli.azure</groupId>
     <artifactId>azure-blob-explorer</artifactId>
-    <version>1.0</version>
+    <version>0.1.0-BETA</version>
     <packaging>jar</packaging>
 
     <name>Azure File Explorer</name>
     <description>Upload and Download your files to Azure Blob easily.</description>
     <url>https://github.com/akshaybabloo/azure-blob-explorer</url>
 
+    <developers>
+        <developer>
+            <name>Akshay Raj Gollahalli</name>
+            <email>akshay@gollahalli.com</email>
+            <organization>Gollahalli</organization>
+            <organizationUrl>http://www.gollahalli.com</organizationUrl>
+        </developer>
+    </developers>
+
     <scm>
-        <url>scm:git:https://github.com/akshaybabloo/azure-blob-explorer</url>
+        <url>https://github.com/akshaybabloo/azure-blob-explorer/tree/master</url>
         <connection>scm:git:git://github.com/akshaybabloo/azure-blob-explorer.git</connection>
+        <developerConnection>scm:git:ssh://github.com:akshaybabloo/azure-blob-explorer.git</developerConnection>
     </scm>
 
     <licenses>
