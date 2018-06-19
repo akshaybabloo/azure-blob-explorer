@@ -6,6 +6,7 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import javafx.util.Pair;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 /**
  * Implements uploading files to Azure containers.
@@ -106,14 +108,14 @@ public class AzureBlobUpload {
 
 
     /**
-     *  Do a recursive upload to the folder path provided.
+     * Do a recursive upload of the folder path provided.
      *
      * @param folderPath Absolute path to a folder.
      * @return URL of the uploaded location.
      * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
-     * @throws StorageException If container is not found.
+     * @throws StorageException   If container is not found.
      */
-    public String uploadFromFolder(String folderPath) throws URISyntaxException, StorageException {
+    public String uploadFromFolder(String folderPath) throws URISyntaxException, StorageException, IOException {
         // TODO: Remove redundant code.
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
@@ -125,6 +127,22 @@ public class AzureBlobUpload {
         if (!Utils.containerExists(cloudBlobClient, this.containerName)) {
             Utils.createContainer(cloudBlobContainer);
         }
+
+        Pair pair = Utils.getRelativePaths(folderPath);
+
+        // Absolute paths
+        List<String> absolutePath = (List<String>) pair.getKey();
+        // Relative paths.
+        List<String> relativePath = (List<String>) pair.getValue();
+
+        CloudBlockBlob blob;
+        int count = absolutePath.size();
+
+        for (int i = 0; i < count; i++) {
+            blob = cloudBlobContainer.getBlockBlobReference(relativePath.get(i));
+            blob.uploadFromFile(absolutePath.get(i));
+        }
+
         return "";
     }
 
