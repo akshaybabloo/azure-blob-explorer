@@ -1,22 +1,34 @@
 package com.gollahalli.azure;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AzureBlobUploadTest {
 
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
     }
 
-    @org.junit.jupiter.api.AfterEach
+    @AfterEach
     void tearDown() {
     }
 
-    @org.junit.jupiter.api.Test
-    void upload() {
+    @Test
+    void uploadFromFile() {
     }
 
-    @org.junit.jupiter.api.Test
-    void recursiveUpload() {
+    @Test
+    void uploadFromFile1() {
+    }
+
+    @Test
+    void uploadFromFolder() {
+    }
+
+    @Test
+    void uploadFromFolder1() {
     }
 }

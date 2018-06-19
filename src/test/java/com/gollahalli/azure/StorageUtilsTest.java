@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UtilsTest {
+class StorageUtilsTest {
 
     @BeforeEach
     void setUp() {
@@ -21,11 +21,19 @@ class UtilsTest {
     }
 
     @Test
+    void listContainers1() {
+    }
+
+    @Test
+    void listContainers2() {
+    }
+
+    @Test
     void createContainer() {
     }
 
     @Test
-    void conatinerExists() {
+    void createContainer1() {
     }
 
     @Test
@@ -34,5 +42,13 @@ class UtilsTest {
 
     @Test
     void containerExists1() {
+    }
+
+    @Test
+    void containerExists2() {
+    }
+
+    @Test
+    void getRelativePaths() {
     }
 }
