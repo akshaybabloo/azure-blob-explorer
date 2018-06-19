@@ -74,8 +74,8 @@ public class AzureBlobUpload {
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
 
-        if (!Utils.containerExists(cloudBlobClient, this.containerName)) {
-            Utils.createContainer(cloudBlobContainer);
+        if (!StorageUtils.containerExists(cloudBlobClient, this.containerName)) {
+            StorageUtils.createContainer(cloudBlobContainer);
         }
 
         String fileName = FilenameUtils.getName(pathFileName);
@@ -124,11 +124,11 @@ public class AzureBlobUpload {
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
 
-        if (!Utils.containerExists(cloudBlobClient, this.containerName)) {
-            Utils.createContainer(cloudBlobContainer);
+        if (!StorageUtils.containerExists(cloudBlobClient, this.containerName)) {
+            StorageUtils.createContainer(cloudBlobContainer);
         }
 
-        Pair pair = Utils.getRelativePaths(folderPath);
+        Pair pair = StorageUtils.getRelativePaths(folderPath);
 
         // Absolute paths
         List<String> absolutePath = (List<String>) pair.getKey();
