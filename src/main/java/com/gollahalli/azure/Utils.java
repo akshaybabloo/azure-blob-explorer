@@ -3,9 +3,14 @@ package com.gollahalli.azure;
 import com.microsoft.azure.storage.OperationContext;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.*;
+import javafx.util.Pair;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +56,7 @@ public class Utils {
      */
     public static List<String> listContainers(CloudBlobClient blobClient) {
 
-        List<String> uris = new ArrayList<String>();
+        List<String> uris = new ArrayList<>();
 
         for (CloudBlobContainer blobItem : blobClient.listContainers()) {
             uris.add(blobItem.getName());
@@ -96,7 +101,7 @@ public class Utils {
     /**
      * Checks if a containers exists with the name given.
      *
-     * @param container {@link CloudBlobContainer} object.
+     * @param container     {@link CloudBlobContainer} object.
      * @param containerName Name of the container to check.
      * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
      */
@@ -108,7 +113,7 @@ public class Utils {
      * Checks if a containers exists with the name given.
      *
      * @param cloudBlobClient {@link CloudBlobClient} object.
-     * @param containerName Name of the container to check.
+     * @param containerName   Name of the container to check.
      * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
      */
     public static boolean containerExists(CloudBlobClient cloudBlobClient, String containerName) {
@@ -116,5 +121,27 @@ public class Utils {
         List<String> containers = listContainers(cloudBlobClient);
 
         return containers.contains(containerName);
+    }
+
+    /**
+     * Returns the relative path of all the files in an absolute folder path.
+     *
+     * @param folderPath Absolute path of the folder.
+     * @return All the paths of the files and folder from the root folder.
+     */
+    public static Pair<List, List> getRelativePaths(String folderPath) {
+
+        String parentDirectory = FilenameUtils.getName(folderPath);
+
+        List<String> relativePaths = new ArrayList<>();
+        List<String> absolutePaths = new ArrayList<>();
+
+        File f = new File(folderPath);
+        for (File k : FileUtils.listFiles(f, TrueFileFilter.TRUE, TrueFileFilter.TRUE)) {
+            absolutePaths.add(k.getPath());
+            relativePaths.add(k.getPath().replace(folderPath, parentDirectory));
+        }
+
+        return new Pair<>(absolutePaths, relativePaths);
     }
 }
