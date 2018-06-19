@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Utilities for {@link AzureBlobUpload} and {@link AzureBlobDownload}.
  */
-public class Utils {
+public class StorageUtils {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
