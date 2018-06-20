@@ -136,12 +136,12 @@ public class AzureBlobUpload {
      *
      * @param folderPath Absolute path to a folder.
      * @param blobPath   Path of the blob folder.
-     * @return URL of the uploaded location.
+     * @return URI of the uploaded location.
      * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
      * @throws StorageException   If container is not found.
      * @throws IOException        If your absolute path contains no file.
      */
-    public URL uploadFromFolder(String folderPath, String blobPath) throws URISyntaxException, StorageException, IOException {
+    public URI uploadFromFolder(String folderPath, String blobPath) throws URISyntaxException, StorageException, IOException {
         // TODO: Remove redundant code.
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
@@ -178,19 +178,19 @@ public class AzureBlobUpload {
         }
 
         assert blob != null;
-        return new URL(new URL(blob.getParent().getUri().toString()), FilenameUtils.getName(folderPath));
+        return new URL(new URL(blob.getParent().getUri().toString()), FilenameUtils.getName(folderPath)).toURI();
     }
 
     /**
      * Do a recursive upload of the folder path provided.
      *
      * @param folderPath Absolute path to a folder.
-     * @return URL of the uploaded file.
+     * @return URI of the uploaded file.
      * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
      * @throws StorageException   If container is not found.
      * @throws IOException        If your absolute path contains no file.
      */
-    public URL uploadFromFolder(String folderPath) throws URISyntaxException, StorageException, IOException {
+    public URI uploadFromFolder(String folderPath) throws URISyntaxException, StorageException, IOException {
         return uploadFromFolder(folderPath, null);
     }
 
