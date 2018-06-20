@@ -1,8 +1,8 @@
 # Azure Blob Explorer
 
-<p align="center"><img src="https://www.dropbox.com/s/clbr2r25afk3b34/coming-soon-ribbon.jpg?raw=1" alt="Coming Soon" width="500"></p>
-
 A simple and easy to use library to upload all your assets/files/folders to Azure blob containers.
+
+> Download files have not yet been implemented.
 
 ## Instillation
 
@@ -12,7 +12,7 @@ Via Maven
 <dependency>
   <groupId>com.gollahalli.azure</groupId>
   <artifactId>azure-blob-explorer</artifactId>
-  <version>1.0</version>
+  <version>0.1.0-BETA</version>
 </dependency>
 ```
 
