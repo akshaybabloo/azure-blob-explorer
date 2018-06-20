@@ -41,7 +41,7 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * Implements uploading files to Azure containers.
+ * Implements uploading files to Azure blob containers.
  */
 public class AzureBlobUpload {
 
@@ -53,7 +53,7 @@ public class AzureBlobUpload {
     private static final Logger LOGGER = LogManager.getLogger();
 
     /**
-     * Implements uploading files to Azure containers.
+     * Implements uploading files to Azure blob containers.
      *
      * @param accountName   Account name from your <strong>Access Keys</strong>.
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
@@ -69,7 +69,7 @@ public class AzureBlobUpload {
     }
 
     /**
-     * Implements uploading files to Azure containers with HTTPS as <code>true</code> by default.
+     * Implements uploading files to Azure blob containers with HTTPS as <code>true</code> by default.
      *
      * @param accountName   Account name from your <strong>Access Keys</strong>.
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
