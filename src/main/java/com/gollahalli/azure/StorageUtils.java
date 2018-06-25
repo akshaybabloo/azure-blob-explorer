@@ -190,6 +190,8 @@ public class StorageUtils {
     }
 
     /**
+     * Get all the blob paths with its respective local paths to save in.
+     *
      * @param cloudBlobContainer {@link CloudBlobContainer} object.
      * @param blobFolderName     Blob folder path.
      * @param folderPath         Local folder path (where you want to save).
@@ -205,11 +207,10 @@ public class StorageUtils {
         String blobRootName = FilenameUtils.getName(blobFolderName);
 
         for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
+            blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
             if (keepBlobName) {
-                blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
                 folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", "")));
             } else {
-                blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", ""));
                 folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
             }
         }
