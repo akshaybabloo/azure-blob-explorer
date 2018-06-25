@@ -24,6 +24,9 @@
 package com.gollahalli.azure;
 
 import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.StorageCredentialsAccountAndKey;
+import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.blob.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -71,28 +74,61 @@ public class AzureBlobDelete {
      * @param blobPathFileName Blob path with file name to delete.
      * @return URI of the deleted file.
      * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
+     * @throws StorageException Is used by {@link CloudStorageAccount}.
      */
-    public URI deleteFile(String blobPathFileName) throws URISyntaxException {
+    public URI deleteFile(String blobPathFileName) throws URISyntaxException, StorageException {
 
-        return new URI("");
+        StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
+        CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+
+        CloudBlockBlob cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPathFileName);
+        cloudBlockBlob.delete();
+
+        return cloudBlockBlob.getUri();
     }
 
     /**
      * Permanently deletes the blob and it's contents.
      *
-     * @param blobFolderPath Path to blob folder.
+     * @param blobFolderPath Path to file or folder.
      * @return Deleted blobs URI
      * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
+     * @throws StorageException Is used by {@link CloudStorageAccount}.
      */
-    public URI deleteBlob(String blobFolderPath) throws URISyntaxException {
+    public URI deleteBlob(String blobFolderPath) throws URISyntaxException, StorageException {
+        StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
+        CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
 
-        return new URI("");
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+
+        CloudBlockBlob cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobFolderPath);
+
+        for (ListBlobItem listBlobItem : cloudBlobContainer.listBlobs(blobFolderPath, true)) {
+            if (listBlobItem instanceof CloudBlob) {
+                ((CloudBlob) listBlobItem).delete();
+            }
+        }
+
+        return cloudBlockBlob.getUri();
     }
 
     /**
      * Deletes the container provided while creating the instance instance.
+     *
+     * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
+     * @throws StorageException Is used by {@link CloudStorageAccount}.
      */
-    public void deleteContainer(){
+    public void deleteContainer() throws URISyntaxException, StorageException {
+        StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
+        CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
 
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+
+        cloudBlobContainer.deleteIfExists();
     }
 }
