@@ -70,9 +70,9 @@ public class AzureBlobDownload {
      * Download a file from a given blob path of the container.
      *
      * @param blobPathFileName Path to the file name on the container.
-     * @param saveTo Absolute path to a location on your computer.
+     * @param saveToPath Absolute path to a location on your computer.
      */
-    public void downloadFile(String blobPathFileName, String saveTo) {
+    public void downloadFile(String blobPathFileName, String saveToPath) {
 
     }
 
@@ -80,9 +80,9 @@ public class AzureBlobDownload {
      * Download a blob folder and its contents.
      *
      * @param blobFolderPath Folder path on the container to download.
-     * @param saveTo Absolute path to a location on your computer.
+     * @param saveToPath Absolute path to a location on your computer.
      */
-    public void downloadFolder(String blobFolderPath, String saveTo) {
+    public void downloadFolder(String blobFolderPath, String saveToPath) {
 
     }
 }
