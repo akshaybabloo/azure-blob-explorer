@@ -178,7 +178,7 @@ public class StorageUtils {
      * @param blobFolderName     Path to the blob folder.
      * @return A array of blob URI's
      */
-    public static ArrayList<URI> listBlobs(CloudBlobContainer cloudBlobContainer, String blobFolderName) throws URISyntaxException, StorageException {
+    public static ArrayList<URI> listBlobs(CloudBlobContainer cloudBlobContainer, String blobFolderName) {
 
         ArrayList<URI> uris = new ArrayList<>();
 
