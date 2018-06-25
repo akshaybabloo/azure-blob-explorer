@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -164,9 +164,17 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>void</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#downloadFolder-java.lang.String-java.lang.String-">downloadFolder</a></span>(java.lang.String&nbsp;blobFolderPath,
               java.lang.String&nbsp;saveToPath)</code>
+<div class="block">Download a blob folder and its contents.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#downloadFolder-java.lang.String-java.lang.String-boolean-">downloadFolder</a></span>(java.lang.String&nbsp;blobFolderPath,
+              java.lang.String&nbsp;saveToPath,
+              boolean&nbsp;keepBlobName)</code>
 <div class="block">Download a blob folder and its contents.</div>
 </td>
 </tr>
@@ -267,16 +275,52 @@ extends java.lang.Object</pre>
 <a name="downloadFolder-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>downloadFolder</h4>
-<pre>public&nbsp;void&nbsp;downloadFolder(java.lang.String&nbsp;blobFolderPath,
-                           java.lang.String&nbsp;saveToPath)</pre>
+<pre>public&nbsp;java.lang.String&nbsp;downloadFolder(java.lang.String&nbsp;blobFolderPath,
+                                       java.lang.String&nbsp;saveToPath)
+                                throws java.net.URISyntaxException,
+                                       com.microsoft.azure.storage.StorageException,
+                                       java.io.IOException</pre>
 <div class="block">Download a blob folder and its contents.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>blobFolderPath</code> - Folder path on the container to download.</dd>
 <dd><code>saveToPath</code> - Absolute path to a location on your computer.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Path of the folder.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.net.URISyntaxException</code> - If an invalid account name is provided.</dd>
+<dd><code>com.microsoft.azure.storage.StorageException</code> - Storage error.</dd>
+<dd><code>java.io.IOException</code> - If the file does not exist.</dd>
+</dl>
+</li>
+</ul>
+<a name="downloadFolder-java.lang.String-java.lang.String-boolean-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>downloadFolder</h4>
+<pre>public&nbsp;java.lang.String&nbsp;downloadFolder(java.lang.String&nbsp;blobFolderPath,
+                                       java.lang.String&nbsp;saveToPath,
+                                       boolean&nbsp;keepBlobName)
+                                throws java.net.URISyntaxException,
+                                       com.microsoft.azure.storage.StorageException,
+                                       java.io.IOException</pre>
+<div class="block">Download a blob folder and its contents.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>blobFolderPath</code> - Folder path on the container to download.</dd>
+<dd><code>saveToPath</code> - Absolute path to a location on your computer.</dd>
+<dd><code>keepBlobName</code> - Keep the root name of the folder.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Path of the folder.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.net.URISyntaxException</code> - If an invalid account name is provided.</dd>
+<dd><code>com.microsoft.azure.storage.StorageException</code> - Storage error.</dd>
+<dd><code>java.io.IOException</code> - If the file does not exist.</dd>
 </dl>
 </li>
 </ul>

@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AzureBlobDelete</span>
 extends java.lang.Object</pre>
-<div class="block">Implements deleting files and blobs.</div>
+<div class="block">Implements deleting file, blobs and containers.</div>
 </li>
 </ul>
 </div>
@@ -158,9 +158,17 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.net.URI</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDelete.html#deleteBlob-java.lang.String-">deleteBlob</a></span>(java.lang.String&nbsp;blobFolderPath)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDelete.html#deleteBlob-java.lang.String-">deleteBlob</a></span>(java.lang.String&nbsp;blobFolderPath)</code>
+<div class="block">Permanently deletes the blob and it's contents.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDelete.html#deleteContainer--">deleteContainer</a></span>()</code>
+<div class="block">Deletes the container provided while creating the instance instance.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.net.URI</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDelete.html#deleteFile-java.lang.String-">deleteFile</a></span>(java.lang.String&nbsp;blobPathFileName)</code>
 <div class="block">Deletes a file in the given path with the file name.</div>
@@ -250,25 +258,37 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>URI of the deleted file.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.net.URISyntaxException</code></dd>
+<dd><code>java.net.URISyntaxException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
 </dl>
 </li>
 </ul>
 <a name="deleteBlob-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>deleteBlob</h4>
 <pre>public&nbsp;java.net.URI&nbsp;deleteBlob(java.lang.String&nbsp;blobFolderPath)
                         throws java.net.URISyntaxException</pre>
+<div class="block">Permanently deletes the blob and it's contents.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>blobFolderPath</code> - </dd>
+<dd><code>blobFolderPath</code> - Path to blob folder.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
+<dd>Deleted blobs URI</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.net.URISyntaxException</code></dd>
+<dd><code>java.net.URISyntaxException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
 </dl>
+</li>
+</ul>
+<a name="deleteContainer--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>deleteContainer</h4>
+<pre>public&nbsp;void&nbsp;deleteContainer()</pre>
+<div class="block">Deletes the container provided while creating the instance instance.</div>
 </li>
 </ul>
 </li>
