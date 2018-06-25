@@ -29,12 +29,16 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import javafx.util.Pair;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 /**
  * Implements downloading contents from Azure blob containers.
@@ -80,10 +84,10 @@ public class AzureBlobDownload {
      *
      * @param blobPathFileName Path to the file name on the container.
      * @param saveToPath       Absolute path to a location on your computer.
+     * @return The path of the file.
      * @throws URISyntaxException If an invalid account name is provided.
      * @throws StorageException   Storage error.
      * @throws IOException        If the file does not exist.
-     * @return The path of the file.
      */
     public String downloadFile(String blobPathFileName, String saveToPath) throws URISyntaxException, StorageException, IOException {
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
@@ -108,8 +112,47 @@ public class AzureBlobDownload {
      *
      * @param blobFolderPath Folder path on the container to download.
      * @param saveToPath     Absolute path to a location on your computer.
+     * @return Path of the folder.
+     * @throws URISyntaxException If an invalid account name is provided.
+     * @throws StorageException   Storage error.
+     * @throws IOException        If the file does not exist.
      */
-    public void downloadFolder(String blobFolderPath, String saveToPath) {
+    public String downloadFolder(String blobFolderPath, String saveToPath) throws URISyntaxException, StorageException, IOException {
+        return downloadFolder(blobFolderPath, saveToPath, true);
+    }
 
+    /**
+     * Download a blob folder and its contents.
+     *
+     * @param blobFolderPath Folder path on the container to download.
+     * @param saveToPath     Absolute path to a location on your computer.
+     * @param keepBlobName   Keep the root name of the folder.
+     * @return Path of the folder.
+     * @throws URISyntaxException If an invalid account name is provided.
+     * @throws StorageException   Storage error.
+     * @throws IOException        If the file does not exist.
+     */
+    public String downloadFolder(String blobFolderPath, String saveToPath, boolean keepBlobName) throws URISyntaxException, StorageException, IOException {
+        StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
+        CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+
+        Pair relativePaths = StorageUtils.getBlobRelativePaths(cloudBlobContainer, blobFolderPath, saveToPath, keepBlobName);
+
+        List<String> blobPaths = (List<String>) relativePaths.getKey();
+        List<String> folderFilePaths = (List<String>) relativePaths.getValue();
+        int count = blobPaths.size();
+        int counter = count;
+
+        CloudBlockBlob cloudBlockBlob;
+        for (int i = 0; i < count; i++) {
+            cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPaths.get(i));
+            File file = new File(folderFilePaths.get(i));
+            cloudBlockBlob.download(FileUtils.openOutputStream(file, true));
+        }
+
+        return saveToPath;
     }
 }
