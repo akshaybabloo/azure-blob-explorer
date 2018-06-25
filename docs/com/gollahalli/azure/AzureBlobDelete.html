@@ -250,7 +250,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>deleteFile</h4>
 <pre>public&nbsp;java.net.URI&nbsp;deleteFile(java.lang.String&nbsp;blobPathFileName)
-                        throws java.net.URISyntaxException</pre>
+                        throws java.net.URISyntaxException,
+                               com.microsoft.azure.storage.StorageException</pre>
 <div class="block">Deletes a file in the given path with the file name.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -259,6 +260,7 @@ extends java.lang.Object</pre>
 <dd>URI of the deleted file.</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.net.URISyntaxException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
+<dd><code>com.microsoft.azure.storage.StorageException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
 </dl>
 </li>
 </ul>
@@ -269,15 +271,17 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>deleteBlob</h4>
 <pre>public&nbsp;java.net.URI&nbsp;deleteBlob(java.lang.String&nbsp;blobFolderPath)
-                        throws java.net.URISyntaxException</pre>
+                        throws java.net.URISyntaxException,
+                               com.microsoft.azure.storage.StorageException</pre>
 <div class="block">Permanently deletes the blob and it's contents.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>blobFolderPath</code> - Path to blob folder.</dd>
+<dd><code>blobFolderPath</code> - Path to file or folder.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Deleted blobs URI</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.net.URISyntaxException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
+<dd><code>com.microsoft.azure.storage.StorageException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
 </dl>
 </li>
 </ul>
@@ -287,8 +291,15 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>deleteContainer</h4>
-<pre>public&nbsp;void&nbsp;deleteContainer()</pre>
+<pre>public&nbsp;void&nbsp;deleteContainer()
+                     throws java.net.URISyntaxException,
+                            com.microsoft.azure.storage.StorageException</pre>
 <div class="block">Deletes the container provided while creating the instance instance.</div>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.net.URISyntaxException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
+<dd><code>com.microsoft.azure.storage.StorageException</code> - Is used by <code>CloudStorageAccount</code>.</dd>
+</dl>
 </li>
 </ul>
 </li>
