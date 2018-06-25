@@ -41,7 +41,7 @@ import java.util.List;
 
 
 /**
- * Utilities for {@link AzureBlobUpload} and {@link AzureBlobDownload}.
+ * Utilities for {@link AzureBlobUpload}, {@link AzureBlobDownload} and {@link AzureBlobDelete}.
  */
 public class StorageUtils {
 
