@@ -92,12 +92,12 @@ public class AzureBlobDownload {
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
 
-        CloudBlockBlob b = cloudBlobContainer.getBlockBlobReference(blobPathFileName);
+        CloudBlockBlob cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPathFileName);
 
         String fileName = FilenameUtils.getName(blobPathFileName);
         String localPath = FilenameUtils.concat(saveToPath, fileName);
 
-        b.downloadToFile(localPath);
+        cloudBlockBlob.downloadToFile(localPath);
 
         return localPath;
 
