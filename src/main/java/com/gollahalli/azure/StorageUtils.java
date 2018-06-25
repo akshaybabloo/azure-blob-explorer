@@ -34,6 +34,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,6 +155,7 @@ public class StorageUtils {
      * @return All the paths of the files and folder from the root folder.
      */
     public static Pair<List, List> getRelativePaths(String folderPath) {
+        // TODO: Add custom pairs.
 
         String parentDirectory = FilenameUtils.getName(folderPath);
 
@@ -166,5 +169,51 @@ public class StorageUtils {
         }
 
         return new Pair<>(absolutePaths, relativePaths);
+    }
+
+    /**
+     * Lists all the contents in a blob recursively.
+     *
+     * @param cloudBlobContainer {@link CloudBlobClient} object.
+     * @param blobFolderName     Path to the blob folder.
+     * @return A array of blob URI's
+     */
+    public static ArrayList<URI> listBlobs(CloudBlobContainer cloudBlobContainer, String blobFolderName) throws URISyntaxException, StorageException {
+
+        ArrayList<URI> uris = new ArrayList<>();
+
+        for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
+            uris.add(blob.getUri());
+        }
+
+        return uris;
+    }
+
+    /**
+     * @param cloudBlobContainer {@link CloudBlobContainer} object.
+     * @param blobFolderName     Blob folder path.
+     * @param folderPath         Local folder path (where you want to save).
+     * @param keepBlobName       Keep the root name of the folder.
+     * @return A pair of <code>blobPath</code> and <code>folderFilePath</code>.
+     * @throws URISyntaxException If an invalid account name is provided.
+     * @throws StorageException   Storage error.
+     */
+    public static Pair<List, List> getBlobRelativePaths(CloudBlobContainer cloudBlobContainer, String blobFolderName, String folderPath, boolean keepBlobName) throws URISyntaxException, StorageException {
+        // TODO: Add custom pairs.
+        List<String> blobPath = new ArrayList<>();
+        List<String> folderFilePath = new ArrayList<>();
+        String blobRootName = FilenameUtils.getName(blobFolderName);
+
+        for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
+            if (keepBlobName) {
+                blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
+                folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", "")));
+            } else {
+                blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", ""));
+                folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
+            }
+        }
+
+        return new Pair<>(blobPath, folderFilePath);
     }
 }
