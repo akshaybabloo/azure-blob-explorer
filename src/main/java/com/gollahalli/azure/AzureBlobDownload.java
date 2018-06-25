@@ -23,8 +23,18 @@
  */
 package com.gollahalli.azure;
 
+import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.StorageCredentialsAccountAndKey;
+import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.blob.CloudBlobClient;
+import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * Implements downloading contents from Azure blob containers.
@@ -35,7 +45,6 @@ public class AzureBlobDownload {
     private String accountKey;
     private String containerName;
     private boolean useHttps;
-    private String saveTo;
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -70,9 +79,27 @@ public class AzureBlobDownload {
      * Download a file from a given blob path of the container.
      *
      * @param blobPathFileName Path to the file name on the container.
-     * @param saveToPath Absolute path to a location on your computer.
+     * @param saveToPath       Absolute path to a location on your computer.
+     * @throws URISyntaxException If an invalid account name is provided.
+     * @throws StorageException   Storage error.
+     * @throws IOException        If the file does not exist.
+     * @return The path of the file.
      */
-    public void downloadFile(String blobPathFileName, String saveToPath) {
+    public String downloadFile(String blobPathFileName, String saveToPath) throws URISyntaxException, StorageException, IOException {
+        StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
+        CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+
+        CloudBlockBlob b = cloudBlobContainer.getBlockBlobReference(blobPathFileName);
+
+        String fileName = FilenameUtils.getName(blobPathFileName);
+        String localPath = FilenameUtils.concat(saveToPath, fileName);
+
+        b.downloadToFile(localPath);
+
+        return localPath;
 
     }
 
@@ -80,7 +107,7 @@ public class AzureBlobDownload {
      * Download a blob folder and its contents.
      *
      * @param blobFolderPath Folder path on the container to download.
-     * @param saveToPath Absolute path to a location on your computer.
+     * @param saveToPath     Absolute path to a location on your computer.
      */
     public void downloadFolder(String blobFolderPath, String saveToPath) {
 
