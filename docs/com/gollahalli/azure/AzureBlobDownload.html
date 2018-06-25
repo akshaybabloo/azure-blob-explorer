@@ -46,7 +46,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../com/gollahalli/azure/AzureBlobDelete.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -108,6 +108,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AzureBlobDownload</span>
 extends java.lang.Object</pre>
+<div class="block">Implements downloading contents from Azure blob containers.</div>
 </li>
 </ul>
 </div>
@@ -126,8 +127,19 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#AzureBlobDownload-java.lang.String-java.lang.String-">AzureBlobDownload</a></span>(java.lang.String&nbsp;accountKey,
-                 java.lang.String&nbsp;accountName)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#AzureBlobDownload-java.lang.String-java.lang.String-java.lang.String-">AzureBlobDownload</a></span>(java.lang.String&nbsp;accountName,
+                 java.lang.String&nbsp;accountKey,
+                 java.lang.String&nbsp;containerName)</code>
+<div class="block">Implements downloading contents from Azure blob containers with HTTPS as <code>true</code> by default.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#AzureBlobDownload-java.lang.String-java.lang.String-java.lang.String-boolean-">AzureBlobDownload</a></span>(java.lang.String&nbsp;accountName,
+                 java.lang.String&nbsp;accountKey,
+                 java.lang.String&nbsp;containerName,
+                 boolean&nbsp;useHttps)</code>
+<div class="block">Implements downloading contents from Azure blob containers.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -145,12 +157,18 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#downloadFile-java.lang.String-">downloadFile</a></span>(java.lang.String&nbsp;fileName)</code>&nbsp;</td>
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#downloadFile-java.lang.String-java.lang.String-">downloadFile</a></span>(java.lang.String&nbsp;blobPathFileName,
+            java.lang.String&nbsp;saveToPath)</code>
+<div class="block">Download a file from a given blob path of the container.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#downloadFolder-java.lang.String-">downloadFolder</a></span>(java.lang.String&nbsp;folderName)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/AzureBlobDownload.html#downloadFolder-java.lang.String-java.lang.String-">downloadFolder</a></span>(java.lang.String&nbsp;blobFolderPath,
+              java.lang.String&nbsp;saveToPath)</code>
+<div class="block">Download a blob folder and its contents.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -174,14 +192,43 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="AzureBlobDownload-java.lang.String-java.lang.String-">
+<a name="AzureBlobDownload-java.lang.String-java.lang.String-java.lang.String-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>AzureBlobDownload</h4>
+<pre>public&nbsp;AzureBlobDownload(java.lang.String&nbsp;accountName,
+                         java.lang.String&nbsp;accountKey,
+                         java.lang.String&nbsp;containerName,
+                         boolean&nbsp;useHttps)</pre>
+<div class="block">Implements downloading contents from Azure blob containers.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>accountName</code> - Account name from your <strong>Access Keys</strong>.</dd>
+<dd><code>accountKey</code> - Account key from your <strong>Access Keys</strong>.</dd>
+<dd><code>containerName</code> - Container name you want to uploadFromFile or create.</dd>
+<dd><code>useHttps</code> - <code>true</code> to use HTTPS to connect to the storage service endpoints;
+                      otherwise, <code>false</code>. Defaults to <code>true</code>.</dd>
+</dl>
+</li>
+</ul>
+<a name="AzureBlobDownload-java.lang.String-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>AzureBlobDownload</h4>
-<pre>public&nbsp;AzureBlobDownload(java.lang.String&nbsp;accountKey,
-                         java.lang.String&nbsp;accountName)</pre>
+<pre>public&nbsp;AzureBlobDownload(java.lang.String&nbsp;accountName,
+                         java.lang.String&nbsp;accountKey,
+                         java.lang.String&nbsp;containerName)</pre>
+<div class="block">Implements downloading contents from Azure blob containers with HTTPS as <code>true</code> by default.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>accountName</code> - Account name from your <strong>Access Keys</strong>.</dd>
+<dd><code>accountKey</code> - Account key from your <strong>Access Keys</strong>.</dd>
+<dd><code>containerName</code> - Container name you want to uploadFromFile or create.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -192,22 +239,45 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="downloadFile-java.lang.String-">
+<a name="downloadFile-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>downloadFile</h4>
-<pre>public&nbsp;void&nbsp;downloadFile(java.lang.String&nbsp;fileName)</pre>
+<pre>public&nbsp;java.lang.String&nbsp;downloadFile(java.lang.String&nbsp;blobPathFileName,
+                                     java.lang.String&nbsp;saveToPath)
+                              throws java.net.URISyntaxException,
+                                     com.microsoft.azure.storage.StorageException,
+                                     java.io.IOException</pre>
+<div class="block">Download a file from a given blob path of the container.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>blobPathFileName</code> - Path to the file name on the container.</dd>
+<dd><code>saveToPath</code> - Absolute path to a location on your computer.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The path of the file.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.net.URISyntaxException</code> - If an invalid account name is provided.</dd>
+<dd><code>com.microsoft.azure.storage.StorageException</code> - Storage error.</dd>
+<dd><code>java.io.IOException</code> - If the file does not exist.</dd>
+</dl>
 </li>
 </ul>
-<a name="downloadFolder-java.lang.String-">
+<a name="downloadFolder-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>downloadFolder</h4>
-<pre>public&nbsp;void&nbsp;downloadFolder(java.lang.String&nbsp;folderName)</pre>
+<pre>public&nbsp;void&nbsp;downloadFolder(java.lang.String&nbsp;blobFolderPath,
+                           java.lang.String&nbsp;saveToPath)</pre>
+<div class="block">Download a blob folder and its contents.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>blobFolderPath</code> - Folder path on the container to download.</dd>
+<dd><code>saveToPath</code> - Absolute path to a location on your computer.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -236,7 +306,7 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../com/gollahalli/azure/AzureBlobDelete.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

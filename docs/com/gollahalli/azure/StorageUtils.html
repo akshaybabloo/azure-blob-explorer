@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -145,56 +145,61 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static java.util.ArrayList&lt;java.net.URI&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#blobExists-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-">blobExists</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
+          java.lang.String&nbsp;blobFolderName)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#containerExists-com.microsoft.azure.storage.blob.CloudBlobClient-java.lang.String-">containerExists</a></span>(com.microsoft.azure.storage.blob.CloudBlobClient&nbsp;cloudBlobClient,
                java.lang.String&nbsp;containerName)</code>
 <div class="block">Checks if a containers exists with the name given.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#containerExists-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-">containerExists</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;container,
                java.lang.String&nbsp;containerName)</code>
 <div class="block">Checks if a containers exists with the name given.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#containerExists-java.lang.String-">containerExists</a></span>(java.lang.String&nbsp;containerName)</code>
 <div class="block">Checks if a containers exists with the name given.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#createContainer-com.microsoft.azure.storage.blob.CloudBlobContainer-">createContainer</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;container)</code>
 <div class="block">Creates a container.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#createContainer-java.lang.String-">createContainer</a></span>(java.lang.String&nbsp;containerName)</code>
 <div class="block">Creates a container.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static javafx.util.Pair&lt;java.util.List,java.util.List&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#getRelativePaths-java.lang.String-">getRelativePaths</a></span>(java.lang.String&nbsp;folderPath)</code>
 <div class="block">Returns the relative path of all the files in an absolute folder path.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#listContainers-com.microsoft.azure.storage.blob.CloudBlobClient-">listContainers</a></span>(com.microsoft.azure.storage.blob.CloudBlobClient&nbsp;blobClient)</code>
 <div class="block">List all the containers in the account provided.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#listContainers-com.microsoft.azure.storage.blob.CloudBlobContainer-">listContainers</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;container)</code>
 <div class="block">List all the containers in the account provided.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#listContainers-java.lang.String-">listContainers</a></span>(java.lang.String&nbsp;containerName)</code>
 <div class="block">List all the containers in the account provided.</div>
@@ -377,7 +382,7 @@ extends java.lang.Object</pre>
 <a name="getRelativePaths-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getRelativePaths</h4>
 <pre>public static&nbsp;javafx.util.Pair&lt;java.util.List,java.util.List&gt;&nbsp;getRelativePaths(java.lang.String&nbsp;folderPath)</pre>
@@ -387,6 +392,23 @@ extends java.lang.Object</pre>
 <dd><code>folderPath</code> - Absolute path of the folder.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>All the paths of the files and folder from the root folder.</dd>
+</dl>
+</li>
+</ul>
+<a name="blobExists-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>blobExists</h4>
+<pre>public static&nbsp;java.util.ArrayList&lt;java.net.URI&gt;&nbsp;blobExists(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
+                                                           java.lang.String&nbsp;blobFolderName)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>cloudBlobContainer</code> - </dd>
+<dd><code>blobFolderName</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A array of blob URI's</dd>
 </dl>
 </li>
 </ul>
