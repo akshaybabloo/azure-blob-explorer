@@ -1,10 +1,35 @@
+/**
+ * MIT License
+ *
+ * Copyright (c) 2018 Akshay Raj Gollahalli
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.gollahalli.azure;
+
+import com.microsoft.azure.storage.CloudStorageAccount;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Implements deleting files and blobs.
+ * Implements deleting file, blobs and containers.
  */
 public class AzureBlobDelete {
 
@@ -44,8 +69,8 @@ public class AzureBlobDelete {
      * Deletes a file in the given path with the file name.
      *
      * @param blobPathFileName Blob path with file name to delete.
-     * @return
-     * @throws URISyntaxException
+     * @return URI of the deleted file.
+     * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
      */
     public URI deleteFile(String blobPathFileName) throws URISyntaxException {
 
@@ -53,12 +78,21 @@ public class AzureBlobDelete {
     }
 
     /**
-     * @param blobFolderPath
-     * @return
-     * @throws URISyntaxException
+     * Permanently deletes the blob and it's contents.
+     *
+     * @param blobFolderPath Path to blob folder.
+     * @return Deleted blobs URI
+     * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
      */
     public URI deleteBlob(String blobFolderPath) throws URISyntaxException {
 
         return new URI("");
+    }
+
+    /**
+     * Deletes the container provided while creating the instance instance.
+     */
+    public void deleteContainer(){
+
     }
 }
