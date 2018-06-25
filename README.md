@@ -1,8 +1,6 @@
 # Azure Blob Explorer
 
-A simple and easy to use library to upload all your assets/files/folders to Azure blob containers.
-
-> Download files have not yet been implemented.
+A simple and easy to use library to upload, download and delete all your assets/files/folders to Azure blob containers.
 
 ## Instillation
 
