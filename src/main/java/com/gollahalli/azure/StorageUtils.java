@@ -50,16 +50,6 @@ public class StorageUtils {
     /**
      * List all the containers in the account provided.
      *
-     * @param containerName Name of the container.
-     * @return A list of containers.
-     */
-    public static List<String> listContainers(String containerName) {
-        return null;
-    }
-
-    /**
-     * List all the containers in the account provided.
-     *
      * @param container {@link CloudBlobContainer} object.
      * @return A list of containers.
      */
@@ -92,16 +82,6 @@ public class StorageUtils {
     /**
      * Creates a container.
      *
-     * @param containerName Name of the container.
-     * @return A URI of the container created.
-     */
-    public static String createContainer(String containerName) {
-        return null;
-    }
-
-    /**
-     * Creates a container.
-     *
      * @param container {@link CloudBlobContainer} object.
      * @return Name of the container.
      * @throws StorageException If no container is found.
@@ -111,27 +91,6 @@ public class StorageUtils {
         container.createIfNotExists(BlobContainerPublicAccessType.CONTAINER, new BlobRequestOptions(), new OperationContext());
 
         return null;
-    }
-
-    /**
-     * Checks if a containers exists with the name given.
-     *
-     * @param containerName Name of the container.
-     * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
-     */
-    public static boolean containerExists(String containerName) {
-        return false;
-    }
-
-    /**
-     * Checks if a containers exists with the name given.
-     *
-     * @param container     {@link CloudBlobContainer} object.
-     * @param containerName Name of the container to check.
-     * @return <code>false</code> if container does not exist, <code>true</code> otherwise.
-     */
-    public static boolean containerExists(CloudBlobContainer container, String containerName) {
-        return false;
     }
 
     /**
