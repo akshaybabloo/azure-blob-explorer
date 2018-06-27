@@ -27,6 +27,8 @@ import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.StorageCredentialsAccountAndKey;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -40,6 +42,9 @@ public class AzureBlobDelete {
     private String accountKey;
     private String containerName;
     private boolean useHttps;
+
+    private static final Logger LOGGER = LogManager.getLogger(AzureBlobDownload.class.getName());
+
 
     /**
      * Implements deleting files and blobs.
@@ -55,6 +60,8 @@ public class AzureBlobDelete {
         this.accountKey = accountKey;
         this.containerName = containerName;
         this.useHttps = useHttps;
+        LOGGER.traceEntry();
+        LOGGER.debug("Account Name: {}, Container Name: {}, Use HTTPS?: {}", this.accountName, this.containerName, this.useHttps);
     }
 
     /**
@@ -77,16 +84,22 @@ public class AzureBlobDelete {
      * @throws StorageException Is used by {@link CloudStorageAccount}.
      */
     public URI deleteFile(String blobPathFileName) throws URISyntaxException, StorageException {
+        LOGGER.traceEntry();
+        LOGGER.debug("blobPathFileName: {}.", blobPathFileName);
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
 
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
 
         CloudBlockBlob cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPathFileName);
         cloudBlockBlob.delete();
+        LOGGER.debug("Deleted: {}.", cloudBlockBlob.getName());
 
+        LOGGER.traceExit();
         return cloudBlockBlob.getUri();
     }
 
@@ -99,20 +112,27 @@ public class AzureBlobDelete {
      * @throws StorageException Is used by {@link CloudStorageAccount}.
      */
     public URI deleteBlob(String blobFolderPath) throws URISyntaxException, StorageException {
+        LOGGER.traceEntry();
+        LOGGER.debug("blobPathFileName: {}.", blobFolderPath);
+
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
 
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
 
         CloudBlockBlob cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobFolderPath);
 
         for (ListBlobItem listBlobItem : cloudBlobContainer.listBlobs(blobFolderPath, true)) {
             if (listBlobItem instanceof CloudBlob) {
+                LOGGER.debug("Deleted: {}.", ((CloudBlob) listBlobItem).getName());
                 ((CloudBlob) listBlobItem).delete();
             }
         }
 
+        LOGGER.traceExit();
         return cloudBlockBlob.getUri();
     }
 
@@ -123,12 +143,17 @@ public class AzureBlobDelete {
      * @throws StorageException Is used by {@link CloudStorageAccount}.
      */
     public void deleteContainer() throws URISyntaxException, StorageException {
+        LOGGER.traceEntry();
+
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
 
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
 
         cloudBlobContainer.deleteIfExists();
+        LOGGER.traceExit("Deleted Container: {}.", this.containerName);
     }
 }
