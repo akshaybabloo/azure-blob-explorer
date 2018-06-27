@@ -4,15 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--Package Details-->
     <groupId>com.gollahalli.azure</groupId>
     <artifactId>azure-blob-explorer</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
+    <!--Project Details-->
     <name>Azure File Explorer</name>
     <description>Upload and Download your files to Azure Blob easily.</description>
     <url>https://github.com/akshaybabloo/azure-blob-explorer</url>
 
+    <!--My Details-->
     <developers>
         <developer>
             <name>Akshay Raj Gollahalli</name>
@@ -22,12 +25,14 @@
         </developer>
     </developers>
 
+    <!--My git Repository Details-->
     <scm>
         <url>https://github.com/akshaybabloo/azure-blob-explorer/tree/master</url>
         <connection>scm:git:git://github.com/akshaybabloo/azure-blob-explorer.git</connection>
         <developerConnection>scm:git:ssh://github.com:akshaybabloo/azure-blob-explorer.git</developerConnection>
     </scm>
 
+    <!--The License of this Package-->
     <licenses>
         <license>
             <name>MIT</name>
@@ -36,12 +41,14 @@
         </license>
     </licenses>
 
+    <!--Build Target-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+    <!--For "maven site"-->
     <reporting>
         <plugins>
             <plugin>
@@ -57,6 +64,8 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <!--For "maven package" and Deployment-->
     <build>
         <plugins>
             <plugin>
@@ -131,6 +140,7 @@
         </plugins>
     </build>
 
+    <!--My Project Dependencies-->
     <dependencies>
         <dependency>
             <groupId>com.microsoft.azure</groupId>
