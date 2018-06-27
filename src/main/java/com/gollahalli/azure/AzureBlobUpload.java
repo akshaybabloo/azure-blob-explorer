@@ -66,6 +66,7 @@ public class AzureBlobUpload {
         this.accountKey = accountKey;
         this.useHttps = useHttps;
         this.containerName = containerName;
+        LOGGER.traceEntry();
         LOGGER.debug("Account Name: {}, Container Name: {}, Use HTTPS?: {}", this.accountName, this.containerName, this.useHttps);
     }
 

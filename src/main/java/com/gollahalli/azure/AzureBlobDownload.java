@@ -66,6 +66,7 @@ public class AzureBlobDownload {
         this.accountKey = accountKey;
         this.containerName = containerName;
         this.useHttps = useHttps;
+        LOGGER.traceEntry();
         LOGGER.debug("Account Name: {}, Container Name: {}, Use HTTPS?: {}", this.accountName, this.containerName, this.useHttps);
     }
 
