@@ -83,14 +83,14 @@ public class StorageUtils {
      * Creates a container.
      *
      * @param container {@link CloudBlobContainer} object.
-     * @return Name of the container.
+     * @return URI of the container.
      * @throws StorageException If no container is found.
      */
-    public static String createContainer(CloudBlobContainer container) throws StorageException {
+    public static URI createContainer(CloudBlobContainer container) throws StorageException {
 
         container.createIfNotExists(BlobContainerPublicAccessType.CONTAINER, new BlobRequestOptions(), new OperationContext());
 
-        return null;
+        return container.getUri();
     }
 
     /**
