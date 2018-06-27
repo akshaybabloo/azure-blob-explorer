@@ -45,7 +45,7 @@ import java.util.List;
  */
 public class StorageUtils {
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(StorageUtils.class.getName());
 
     /**
      * List all the containers in the account provided.
@@ -159,19 +159,34 @@ public class StorageUtils {
      * @throws URISyntaxException If an invalid account name is provided.
      * @throws StorageException   Storage error.
      */
-    public static Pair<List, List> getBlobRelativePaths(CloudBlobContainer cloudBlobContainer, String blobFolderName, String folderPath, boolean keepBlobName) throws URISyntaxException, StorageException {
+    public static Pair<List, List> getBlobRelativePaths(CloudBlobContainer cloudBlobContainer, String blobFolderName, String folderPath, boolean keepBlobName) {
+        LOGGER.traceEntry();
         // TODO: Add custom pairs.
         List<String> blobPath = new ArrayList<>();
         List<String> folderFilePath = new ArrayList<>();
         String blobRootName = FilenameUtils.getName(blobFolderName);
+        LOGGER.debug("blobRootName: {}", blobRootName);
 
-        for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
-            blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
-            if (keepBlobName) {
-                folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", "")));
-            } else {
-                folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
+        try {
+            for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
+
+                blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
+                LOGGER.debug("Blob Path: {}.", blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
+
+                if (keepBlobName) {
+                    folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", "")));
+                    LOGGER.debug("Folder Path: {}.", FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", "")));
+                } else {
+                    folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
+                    LOGGER.debug("Folder Path: {}.", FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
+                }
             }
+        } catch (StorageException e){
+            System.out.println(e);
+            LOGGER.error(e.getStackTrace());
+        } catch (URISyntaxException e){
+            System.out.println(e);
+            LOGGER.error(e.getStackTrace());
         }
 
         return new Pair<>(blobPath, folderFilePath);
