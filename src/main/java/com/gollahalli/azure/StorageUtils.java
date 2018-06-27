@@ -87,9 +87,13 @@ public class StorageUtils {
      * @throws StorageException If no container is found.
      */
     public static URI createContainer(CloudBlobContainer container) throws StorageException {
+        LOGGER.traceEntry();
+        LOGGER.debug("Creating Container: {}", container.getName());
 
         container.createIfNotExists(BlobContainerPublicAccessType.CONTAINER, new BlobRequestOptions(), new OperationContext());
 
+        LOGGER.debug("'{}' Created, URI: {}", container.getName(), container.getUri());
+        LOGGER.traceExit("Container created.");
         return container.getUri();
     }
 
@@ -115,6 +119,8 @@ public class StorageUtils {
      */
     public static Pair<List, List> getRelativePaths(String folderPath) {
         // TODO: Add custom pairs.
+        LOGGER.traceEntry();
+        LOGGER.debug("Folder Path: {}.", folderPath);
 
         String parentDirectory = FilenameUtils.getName(folderPath);
 
@@ -125,8 +131,10 @@ public class StorageUtils {
         for (File k : FileUtils.listFiles(f, TrueFileFilter.TRUE, TrueFileFilter.TRUE)) {
             absolutePaths.add(k.getPath());
             relativePaths.add(k.getPath().replace(folderPath, parentDirectory));
+            LOGGER.debug("Absolute Path: {}, Relative Path: {}.", k.getPath(), k.getPath().replace(folderPath, parentDirectory));
         }
 
+        LOGGER.traceExit();
         return new Pair<>(absolutePaths, relativePaths);
     }
 

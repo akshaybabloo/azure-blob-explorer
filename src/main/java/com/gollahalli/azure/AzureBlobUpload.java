@@ -66,6 +66,7 @@ public class AzureBlobUpload {
         this.accountKey = accountKey;
         this.useHttps = useHttps;
         this.containerName = containerName;
+        LOGGER.debug("Account Name: {}, Container Name: {}, Use HTTPS?: {}", this.accountName, this.containerName, this.useHttps);
     }
 
     /**
@@ -91,29 +92,39 @@ public class AzureBlobUpload {
      * @throws IOException        If the file does not exist.
      */
     public URI uploadFromFile(String pathFileName, String blobPath) throws URISyntaxException, StorageException, IOException {
+        LOGGER.traceEntry();
+        LOGGER.debug("pathFileName: {}, blobPath: {}.", pathFileName, blobPath);
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
 
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
 
         if (!StorageUtils.containerExists(cloudBlobClient, this.containerName)) {
+            LOGGER.debug("Container {} does not exists", this.containerName);
             StorageUtils.createContainer(cloudBlobContainer);
         }
 
         String fileName = FilenameUtils.getName(pathFileName);
         pathFileName = FilenameUtils.normalize(pathFileName);
+        LOGGER.debug("File Name: {}, File Name with Path: {}", fileName, pathFileName);
 
         CloudBlockBlob blob;
         if (blobPath != null) {
             blob = cloudBlobContainer.getBlockBlobReference(blobPath + fileName);
+            LOGGER.debug("Block Reference: {}", blob.getName());
         } else {
             blob = cloudBlobContainer.getBlockBlobReference(fileName);
+            LOGGER.debug("Block Reference: {}", blob.getName());
         }
 
         blob.uploadFromFile(pathFileName);
+        LOGGER.debug("Uploaded: {}", pathFileName);
 
+        LOGGER.traceExit("URI: {}.", blob.getUri());
         return blob.getUri();
     }
 
@@ -143,14 +154,19 @@ public class AzureBlobUpload {
      */
     public URI uploadFromFolder(String folderPath, String blobPath) throws URISyntaxException, StorageException, IOException {
         // TODO: Remove redundant code.
+        LOGGER.traceEntry();
+        LOGGER.debug("folderPath: {}, blobPath: {}.", folderPath, blobPath);
 
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
 
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
 
         if (!StorageUtils.containerExists(cloudBlobClient, this.containerName)) {
+            LOGGER.debug("Container {} does not exists", this.containerName);
             StorageUtils.createContainer(cloudBlobContainer);
         }
 
@@ -163,22 +179,28 @@ public class AzureBlobUpload {
 
         CloudBlockBlob blob = null;
         int count = absolutePath.size();
+        LOGGER.debug("Number of Files: {}", count);
 
         if (blobPath != null) {
+            LOGGER.debug("No Blob Path Given.");
             for (int i = 0; i < count; i++) {
                 blob = cloudBlobContainer.getBlockBlobReference(blobPath + relativePath.get(i));
                 blob.uploadFromFile(absolutePath.get(i));
+                LOGGER.debug("COUNT: {}, Uploaded: {}.", i+1, absolutePath.get(i));
             }
         } else {
-
+            LOGGER.debug("Blob Path Given.");
             for (int i = 0; i < count; i++) {
                 blob = cloudBlobContainer.getBlockBlobReference(relativePath.get(i));
                 blob.uploadFromFile(absolutePath.get(i));
+                LOGGER.debug("COUNT: {}, Uploaded: {}.", i+1, absolutePath.get(i));
             }
         }
 
         assert blob != null;
-        return new URL(new URL(blob.getParent().getUri().toString()), FilenameUtils.getName(folderPath)).toURI();
+        URI uri = new URL(new URL(blob.getParent().getUri().toString()), FilenameUtils.getName(folderPath)).toURI();
+        LOGGER.traceExit("Uploaded to: {}.", uri);
+        return uri;
     }
 
     /**

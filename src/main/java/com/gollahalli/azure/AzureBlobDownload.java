@@ -166,7 +166,7 @@ public class AzureBlobDownload {
             cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPaths.get(i));
             File file = new File(folderFilePaths.get(i));
             cloudBlockBlob.download(FileUtils.openOutputStream(file, true));
-            LOGGER.debug("Count: {}, File Saved To: {}.", i, file.getPath());
+            LOGGER.debug("Count: {}, File Saved To: {}.", i+1, file.getPath());
         }
 
         LOGGER.traceExit("Saved to: {}.", saveToPath);
