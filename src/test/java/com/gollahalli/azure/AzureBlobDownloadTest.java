@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StorageUtilsTest {
+class AzureBlobDownloadTest {
 
     @BeforeEach
     void setUp() {
@@ -17,30 +17,14 @@ class StorageUtilsTest {
     }
 
     @Test
-    void listContainers() {
+    void downloadFile() {
     }
 
     @Test
-    void listContainers1() {
+    void downloadFolder() {
     }
 
     @Test
-    void createContainer() {
-    }
-
-    @Test
-    void containerExists() {
-    }
-
-    @Test
-    void getRelativePaths() {
-    }
-
-    @Test
-    void listBlobs() {
-    }
-
-    @Test
-    void getBlobRelativePaths() {
+    void downloadFolder1() {
     }
 }
