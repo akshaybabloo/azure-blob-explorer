@@ -10,7 +10,7 @@ Via Maven
 <dependency>
   <groupId>com.gollahalli.azure</groupId>
   <artifactId>azure-blob-explorer</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
