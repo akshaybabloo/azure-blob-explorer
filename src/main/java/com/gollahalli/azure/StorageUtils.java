@@ -156,8 +156,6 @@ public class StorageUtils {
      * @param folderPath         Local folder path (where you want to save).
      * @param keepBlobName       Keep the root name of the folder.
      * @return A pair of <code>blobPath</code> and <code>folderFilePath</code>.
-     * @throws URISyntaxException If an invalid account name is provided.
-     * @throws StorageException   Storage error.
      */
     public static Pair<List, List> getBlobRelativePaths(CloudBlobContainer cloudBlobContainer, String blobFolderName, String folderPath, boolean keepBlobName) {
         LOGGER.traceEntry();
