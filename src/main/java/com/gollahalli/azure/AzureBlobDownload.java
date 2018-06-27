@@ -50,7 +50,7 @@ public class AzureBlobDownload {
     private String containerName;
     private boolean useHttps;
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(AzureBlobDownload.class.getName());
 
     /**
      * Implements downloading contents from Azure blob containers.
@@ -66,6 +66,7 @@ public class AzureBlobDownload {
         this.accountKey = accountKey;
         this.containerName = containerName;
         this.useHttps = useHttps;
+        LOGGER.debug("Account Name: {}, Container Name: {}, Use HTTPS?: {}", this.accountName, this.containerName, this.useHttps);
     }
 
     /**
@@ -90,18 +91,25 @@ public class AzureBlobDownload {
      * @throws IOException        If the file does not exist.
      */
     public String downloadFile(String blobPathFileName, String saveToPath) throws URISyntaxException, StorageException, IOException {
+        LOGGER.traceEntry();
+        LOGGER.debug("blobPathFileName: {}, saveToPath: {}.", blobPathFileName, saveToPath);
+
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
 
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
 
         CloudBlockBlob cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPathFileName);
 
         String fileName = FilenameUtils.getName(blobPathFileName);
         String localPath = FilenameUtils.concat(saveToPath, fileName);
+        LOGGER.debug("Complete Path: {}", localPath);
 
         cloudBlockBlob.downloadToFile(localPath);
+        LOGGER.traceExit("Saved @: {}", localPath);
 
         return localPath;
 
@@ -133,26 +141,35 @@ public class AzureBlobDownload {
      * @throws IOException        If the file does not exist.
      */
     public String downloadFolder(String blobFolderPath, String saveToPath, boolean keepBlobName) throws URISyntaxException, StorageException, IOException {
+        LOGGER.traceEntry();
+        LOGGER.debug("blobFolderPath: {}, saveToPath: {}, keepBlobName?: {}.", blobFolderPath, saveToPath, keepBlobName);
+
         StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
         CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
 
         CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
         CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
 
         Pair relativePaths = StorageUtils.getBlobRelativePaths(cloudBlobContainer, blobFolderPath, saveToPath, keepBlobName);
+        LOGGER.debug("Container Name: {}", relativePaths.toString());
 
         List<String> blobPaths = (List<String>) relativePaths.getKey();
         List<String> folderFilePaths = (List<String>) relativePaths.getValue();
         int count = blobPaths.size();
         int counter = count;
+        LOGGER.debug("Number of Files: {}", count);
 
         CloudBlockBlob cloudBlockBlob;
         for (int i = 0; i < count; i++) {
             cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPaths.get(i));
             File file = new File(folderFilePaths.get(i));
             cloudBlockBlob.download(FileUtils.openOutputStream(file, true));
+            LOGGER.debug("Count: {}, File Saved To: {}.", i, file.getPath());
         }
 
+        LOGGER.traceExit("Saved to: {}.", saveToPath);
         return saveToPath;
     }
 }
