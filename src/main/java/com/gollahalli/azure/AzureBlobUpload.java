@@ -105,7 +105,7 @@ public class AzureBlobUpload {
         LOGGER.debug("Container Name: {}", this.containerName);
 
         if (!StorageUtils.containerExists(cloudBlobClient, this.containerName)) {
-            LOGGER.debug("Container {} does not exists", this.containerName);
+            LOGGER.debug("Container '{}' does not exists", this.containerName);
             StorageUtils.createContainer(cloudBlobContainer);
         }
 
@@ -167,7 +167,7 @@ public class AzureBlobUpload {
         LOGGER.debug("Container Name: {}", this.containerName);
 
         if (!StorageUtils.containerExists(cloudBlobClient, this.containerName)) {
-            LOGGER.debug("Container {} does not exists", this.containerName);
+            LOGGER.debug("Container '{}' does not exists", this.containerName);
             StorageUtils.createContainer(cloudBlobContainer);
         }
 
