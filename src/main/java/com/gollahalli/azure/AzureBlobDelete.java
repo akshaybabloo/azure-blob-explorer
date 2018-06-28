@@ -38,9 +38,24 @@ import java.net.URISyntaxException;
  */
 public class AzureBlobDelete {
 
+    /**
+     * Account name, it's usually your container name.
+     */
     private String accountName;
+
+    /**
+     * Account key.
+     */
     private String accountKey;
+
+    /**
+     * Your container name.
+     */
     private String containerName;
+
+    /**
+     * Enable HTTPS while using this
+     */
     private boolean useHttps;
 
     private static final Logger LOGGER = LogManager.getLogger(AzureBlobDownload.class.getName());
