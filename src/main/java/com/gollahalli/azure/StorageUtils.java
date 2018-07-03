@@ -1,18 +1,18 @@
 /**
  * MIT License
- *
+ * <p>
  * Copyright (c) 2018 Akshay Raj Gollahalli
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -191,6 +191,48 @@ public class StorageUtils {
                 } else {
                     folderFilePath.add(FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
                     LOGGER.debug("Folder Path: {}.", FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
+                }
+            }
+        } catch (StorageException e) {
+            System.out.println(e);
+            LOGGER.error(e.getStackTrace());
+        } catch (URISyntaxException e) {
+            System.out.println(e);
+            LOGGER.error(e.getStackTrace());
+        }
+
+        return new Pair<>(blobPath, folderFilePath);
+    }
+
+    /**
+     * Just like {@link #getBlobRelativePaths} but instead of returning the local bath to store it returns the file name
+     * and blob paths.
+     *
+     * @param cloudBlobContainer {@link CloudBlobContainer} object.
+     * @param blobFolderName     Blob folder path.
+     * @param keepBlobName       Keep the root name of the folder.
+     * @return A pair of list of <code>blobPath</code> and <code>folderFilePath</code>.
+     */
+    public static Pair<List, List> getBlobRelativeNames(CloudBlobContainer cloudBlobContainer, String blobFolderName, boolean keepBlobName) {
+        LOGGER.traceEntry();
+        // TODO: Add custom pairs.
+        List<String> blobPath = new ArrayList<>();
+        List<String> folderFilePath = new ArrayList<>();
+        String blobRootName = FilenameUtils.getName(blobFolderName);
+        LOGGER.debug("blobRootName: {}", blobRootName);
+
+        try {
+            for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
+
+                blobPath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
+                LOGGER.debug("Blob Path: {}.", blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
+
+                if (keepBlobName) {
+                    folderFilePath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
+                    LOGGER.debug("Folder Path: {}.", blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/", ""));
+                } else {
+                    folderFilePath.add(blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", ""));
+                    LOGGER.debug("Folder Path: {}.", blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", ""));
                 }
             }
         } catch (StorageException e) {
