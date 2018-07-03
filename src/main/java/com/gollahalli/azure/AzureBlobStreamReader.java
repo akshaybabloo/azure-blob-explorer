@@ -164,7 +164,7 @@ public class AzureBlobStreamReader {
     /**
      * Contents of the folder/blob as a stream with it's file name.
      *
-     * @param blobFolderPath
+     * @param blobFolderPath Path to the blob.
      * @return A pair of file names and the stream of data.
      * @throws URISyntaxException If an invalid account name is provided.
      * @throws StorageException   Storage error.
