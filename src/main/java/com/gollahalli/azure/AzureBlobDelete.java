@@ -92,6 +92,13 @@ public class AzureBlobDelete {
 
     /**
      * Deletes a file in the given path with the file name.
+     * <p>
+     * Example:
+     * <pre>
+     *     AzureBlobDelete blobDelete = new AzureBlobDelete("account name", "account key", "container name");
+     *     URI uri = blobDelete.deleteFile("blob/path/fileName.txt");
+     *     System.out.println(uri.toString());
+     * </pre>
      *
      * @param blobPathFileName Blob path with file name to delete.
      * @return URI of the deleted file.
@@ -120,6 +127,13 @@ public class AzureBlobDelete {
 
     /**
      * Permanently deletes the blob and it's contents.
+     * <p>
+     * Example:
+     * <pre>
+     *     AzureBlobDelete blobDelete = new AzureBlobDelete("account name", "account key", "container name");
+     *     URI uri = blobDelete.deleteBlob("blob/path/");
+     *     System.out.println(uri.toString());
+     * </pre>
      *
      * @param blobFolderPath Path to file or folder.
      * @return Deleted blobs URI
@@ -153,6 +167,12 @@ public class AzureBlobDelete {
 
     /**
      * Deletes the container provided while creating the instance instance.
+     * <p>
+     * Example:
+     * <pre>
+     *     AzureBlobDelete blobDelete = new AzureBlobDelete("account name", "account key", "container name");
+     *     URI uri = blobDelete.deleteContainer();
+     * </pre>
      *
      * @throws URISyntaxException Is used by {@link CloudStorageAccount}.
      * @throws StorageException Is used by {@link CloudStorageAccount}.
