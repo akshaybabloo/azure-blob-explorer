@@ -35,6 +35,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implements streaming contents from Azure blob containers.
@@ -95,7 +97,7 @@ public class AzureBlobStream {
     /**
      * Read the file from the blob as {@link InputStreamReader}.
      *
-     * @param blobPathFileName
+     * @param blobPathFileName Path with file name.
      * @return Input stream reader of the file.
      * @throws URISyntaxException If an invalid account name is provided.
      * @throws StorageException   Storage error.
@@ -115,6 +117,47 @@ public class AzureBlobStream {
         CloudBlockBlob cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(blobPathFileName);
         InputStream inputStream = cloudBlockBlob.openInputStream();
 
+        LOGGER.traceExit();
         return new InputStreamReader(inputStream);
+    }
+
+    /**
+     * Contents of the folder/blob as a stream.
+     *
+     * @param blobFolderPath Path to the blob.
+     * @return A list of {@link InputStreamReader}
+     * @throws URISyntaxException If an invalid account name is provided.
+     * @throws StorageException   Storage error.
+     */
+    public List<InputStreamReader> streamFolderReader(String blobFolderPath) throws URISyntaxException, StorageException {
+        LOGGER.traceEntry();
+        LOGGER.debug("blobFolderPath: {}.", blobFolderPath);
+
+        List<InputStreamReader> inputStreamReaders = new ArrayList<>();
+
+        StorageCredentialsAccountAndKey accountAndKey = new StorageCredentialsAccountAndKey(this.accountName, this.accountKey);
+        CloudStorageAccount account = new CloudStorageAccount(accountAndKey, this.useHttps);
+        LOGGER.debug("Account URI: {}.", account.getBlobEndpoint());
+
+        CloudBlobClient cloudBlobClient = account.createCloudBlobClient();
+        CloudBlobContainer cloudBlobContainer = cloudBlobClient.getContainerReference(this.containerName);
+        LOGGER.debug("Container Name: {}", this.containerName);
+
+        List<String> listBlobs = StorageUtils.listBlobs(cloudBlobContainer, blobFolderPath);
+        int count = listBlobs.size();
+        LOGGER.debug("Number of Files: {}", count);
+
+        CloudBlockBlob cloudBlockBlob;
+        InputStream inputStream;
+        for (int i = 0; i < count; i++) {
+            cloudBlockBlob = cloudBlobContainer.getBlockBlobReference(listBlobs.get(i));
+            inputStream = cloudBlockBlob.openInputStream();
+            inputStreamReaders.add(new InputStreamReader(inputStream));
+            LOGGER.debug("Count: {}, File Saved To: {}.", i + 1, listBlobs.get(i));
+        }
+
+        LOGGER.traceExit();
+        return inputStreamReaders;
+
     }
 }
