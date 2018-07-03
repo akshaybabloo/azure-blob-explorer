@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * Implements streaming contents from Azure blob containers.
  */
-public class AzureBlobStream {
+public class AzureBlobStreamReader {
 
     /**
      * Account name, it's usually your container name.
@@ -73,7 +73,7 @@ public class AzureBlobStream {
      * @param accountKey    Account key from your <strong>Access Keys</strong>.
      * @param containerName Container name you want to uploadFromFile or create.
      */
-    public AzureBlobStream(String accountName, String accountKey, String containerName) {
+    public AzureBlobStreamReader(String accountName, String accountKey, String containerName) {
         this(accountName, accountKey, containerName, true);
     }
 
@@ -86,7 +86,7 @@ public class AzureBlobStream {
      * @param useHttps      <code>true</code> to use HTTPS to connect to the storage service endpoints;
      *                      otherwise, <code>false</code>. Defaults to <code>true</code>.
      */
-    public AzureBlobStream(String accountName, String accountKey, String containerName, boolean useHttps) {
+    public AzureBlobStreamReader(String accountName, String accountKey, String containerName, boolean useHttps) {
         this.accountName = accountName;
         this.accountKey = accountKey;
         this.containerName = containerName;
