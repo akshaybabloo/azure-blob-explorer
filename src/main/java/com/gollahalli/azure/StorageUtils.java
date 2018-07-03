@@ -141,22 +141,25 @@ public class StorageUtils {
     /**
      * Lists all the contents in a blob recursively.
      *
-     * @param cloudBlobContainer {@link CloudBlobClient} object.
+     * @param cloudBlobContainer {@link CloudBlobContainer} object.
      * @param blobFolderName     Path to the blob folder.
      * @return A array of blob URI's
      */
-    public static ArrayList<URI> listBlobs(CloudBlobContainer cloudBlobContainer, String blobFolderName) {
+    public static List<String> listBlobs(CloudBlobContainer cloudBlobContainer, String blobFolderName) {
         LOGGER.traceEntry();
         LOGGER.debug("Cloud Container Name: '{}', Blob Path to List: '{}'.", cloudBlobContainer, blobFolderName);
 
-        ArrayList<URI> uris = new ArrayList<>();
+        List<String> paths = new ArrayList<>();
 
-        for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
-            LOGGER.debug("Blob Path: {}.", blob.getUri().toString());
-            uris.add(blob.getUri());
+        for (ListBlobItem listBlobItem : cloudBlobContainer.listBlobs(blobFolderName, true)) {
+            if (listBlobItem instanceof CloudBlob) {
+                LOGGER.debug("Paths: {}.", ((CloudBlob) listBlobItem).getName());
+                paths.add(((CloudBlob) listBlobItem).getName());
+            }
         }
 
-        return uris;
+        LOGGER.traceExit();
+        return paths;
     }
 
     /**
