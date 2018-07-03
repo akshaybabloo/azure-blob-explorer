@@ -146,10 +146,13 @@ public class StorageUtils {
      * @return A array of blob URI's
      */
     public static ArrayList<URI> listBlobs(CloudBlobContainer cloudBlobContainer, String blobFolderName) {
+        LOGGER.traceEntry();
+        LOGGER.debug("Cloud Container Name: '{}', Blob Path to List: '{}'.", cloudBlobContainer, blobFolderName);
 
         ArrayList<URI> uris = new ArrayList<>();
 
         for (ListBlobItem blob : cloudBlobContainer.listBlobs(blobFolderName, true)) {
+            LOGGER.debug("Blob Path: {}.", blob.getUri().toString());
             uris.add(blob.getUri());
         }
 
@@ -187,10 +190,10 @@ public class StorageUtils {
                     LOGGER.debug("Folder Path: {}.", FilenameUtils.concat(folderPath, blob.getUri().toString().replace(blob.getContainer().getUri().toString() + "/" + blobRootName + "/", "")));
                 }
             }
-        } catch (StorageException e){
+        } catch (StorageException e) {
             System.out.println(e);
             LOGGER.error(e.getStackTrace());
-        } catch (URISyntaxException e){
+        } catch (URISyntaxException e) {
             System.out.println(e);
             LOGGER.error(e.getStackTrace());
         }
