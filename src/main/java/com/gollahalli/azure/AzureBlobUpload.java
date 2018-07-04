@@ -99,6 +99,14 @@ public class AzureBlobUpload {
 
     /**
      * Upload a single file to Azure blob and specify the path to the blob folder.
+     * <p>
+     *  Example:
+     * <pre>
+     *     {@code
+     *      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+     *      URI uri = blobUpload.uploadFromFile("c:/path/to/fileName.txt", "path/to/blob/");
+     *      }
+     * </pre>
      *
      * @param pathFileName Absolute path with file name.
      * @param blobPath     Path of the blob folder.
@@ -146,7 +154,14 @@ public class AzureBlobUpload {
 
     /**
      * Upload a single file to the root of Azure container.
-     *
+     * <p>
+     *  Example:
+     * <pre>
+     *     {@code
+     *      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+     *      URI uri = blobUpload.uploadFromFile("c:/path/to/fileName.txt");
+     *      }
+     * </pre>
      * @param pathFileName Absolute path with file name.
      * @return URL of the uploaded file.
      * @throws URISyntaxException If an invalid account name is provided.
@@ -160,6 +175,14 @@ public class AzureBlobUpload {
 
     /**
      * Do a recursive upload of the folder path provided to a given blob path.
+     * <p>
+     *  Example:
+     * <pre>
+     *     {@code
+     *      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+     *      URI uri = blobUpload.uploadFromFolder("c:/path/to/", "path/tp/blob/");
+     *      }
+     * </pre>
      *
      * @param folderPath Absolute path to a folder.
      * @param blobPath   Path of the blob folder.
@@ -221,6 +244,14 @@ public class AzureBlobUpload {
 
     /**
      * Do a recursive upload of the folder path provided.
+     * <p>
+     *  Example:
+     * <pre>
+     *     {@code
+     *      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+     *      URI uri = blobUpload.uploadFromFolder("c:/path/to/");
+     *      }
+     * </pre>
      *
      * @param folderPath Absolute path to a folder.
      * @return URI of the uploaded file.

@@ -1,18 +1,18 @@
 /**
  * MIT License
- *
+ * <p>
  * Copyright (c) 2018 Akshay Raj Gollahalli
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -98,6 +98,14 @@ public class AzureBlobDownload {
 
     /**
      * Download a file from a given blob path of the container.
+     * <p>
+     * Example:
+     * <pre>
+     *     {@code
+     *     AzureBlobDownload blobDownload = new AzureBlobDownload("account name", "account key", "container name");
+     *     String path = blobDownload.downloadFile("blob/path/fileName.txt, "c:/path/to/folder/", false);
+     *     }
+     * </pre>
      *
      * @param blobPathFileName Path to the file name on the container.
      * @param saveToPath       Absolute path to a location on your computer.
@@ -133,6 +141,14 @@ public class AzureBlobDownload {
 
     /**
      * Download a blob folder and its contents.
+     * <p>
+     * Example:
+     * <pre>
+     *     {@code
+     *     AzureBlobDownload blobDownload = new AzureBlobDownload("account name", "account key", "container name");
+     *     String path = blobDownload.downloadFile("blob/path/, "c:/path/to/folder/");
+     *     }
+     * </pre>
      *
      * @param blobFolderPath Folder path on the container to download.
      * @param saveToPath     Absolute path to a location on your computer.
@@ -147,6 +163,14 @@ public class AzureBlobDownload {
 
     /**
      * Download a blob folder and its contents.
+     * <p>
+     * Example:
+     * <pre>
+     *     {@code
+     *     AzureBlobDownload blobDownload = new AzureBlobDownload("account name", "account key", "container name");
+     *     String path = blobDownload.downloadFile("blob/path/, "c:/path/to/folder/", false);
+     *     }
+     * </pre>
      *
      * @param blobFolderPath Folder path on the container to download.
      * @param saveToPath     Absolute path to a location on your computer.

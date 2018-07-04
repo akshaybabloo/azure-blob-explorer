@@ -98,10 +98,11 @@ public class AzureBlobStreamWriter {
      * <p>
      * Example:
      * <pre>
+     *     {@code
      *     AzureBlobStreamWriter streamWriter = new AzureBlobStreamWriter("account name", "account key", "container name");
      *     byte[] someByteArray = new String("some long text).getBytes();
      *     URI uri = streamWriter.streamFileWriter("blob/path/fileName.txt", someByteArray);
-     *     System.out.println(uri);
+     *     }
      * </pre>
      *
      * @param blobPathFileName Blob path with file name.

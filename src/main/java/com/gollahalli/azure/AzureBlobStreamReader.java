@@ -97,7 +97,14 @@ public class AzureBlobStreamReader {
 
     /**
      * Read the file from the blob as {@link InputStreamReader}.
-     *
+     * <p>
+     * Example:
+     * <pre>
+     *     {@code
+     *     AzureBlobStreamReader streamReader = new AzureBlobStreamReader("account name", "account key", "container name");
+     *     InputStreamReader reader = streamReader.streamFileReader("path/to/fileName.txt");
+     *     }
+     * </pre>
      * @param blobPathFileName Path with file name.
      * @return Input stream reader of the file.
      * @throws URISyntaxException If an invalid account name is provided.
@@ -124,6 +131,14 @@ public class AzureBlobStreamReader {
 
     /**
      * Contents of the folder/blob as a stream.
+     * <p>
+     * Example:
+     * <pre>
+     *     {@code
+     *     AzureBlobStreamReader streamReader = new AzureBlobStreamReader("account name", "account key", "container name");
+     *     List<InputStreamReader> reader = streamFolderReader.streamFileReader("path/to/folder");
+     *     }
+     * </pre>
      *
      * @param blobFolderPath Path to the blob.
      * @return A list of {@link InputStreamReader}
@@ -163,6 +178,14 @@ public class AzureBlobStreamReader {
 
     /**
      * Contents of the folder/blob as a stream with it's file name.
+     * <p>
+     * Example:
+     * <pre>
+     *     {@code
+     *     AzureBlobStreamReader streamReader = new AzureBlobStreamReader("account name", "account key", "container name");
+     *     Pair<List<String>, List<InputStreamReader>> reader = streamFolderReader.streamFolderReaderPair("path/to/folder");
+     *     }
+     * </pre>
      *
      * @param blobFolderPath Path to the blob.
      * @return A pair of file names and the stream of data.
