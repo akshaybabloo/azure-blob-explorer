@@ -7,7 +7,7 @@
     <!--Package Details-->
     <groupId>com.gollahalli.azure</groupId>
     <artifactId>azure-blob-explorer</artifactId>
-    <version>1.0.1</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <!--Project Details-->
