@@ -46,7 +46,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gollahalli/azure/AzureBlobDownload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../com/gollahalli/azure/AzureBlobStreamWriter.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../com/gollahalli/azure/StorageUtils.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -262,7 +262,15 @@ extends java.lang.Object</pre>
                             throws java.net.URISyntaxException,
                                    com.microsoft.azure.storage.StorageException,
                                    java.io.IOException</pre>
-<div class="block">Upload a single file to Azure blob and specify the path to the blob folder.</div>
+<div class="block">Upload a single file to Azure blob and specify the path to the blob folder.
+ <p>
+  Example:
+ <pre>
+     <code>
+      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+      URI uri = blobUpload.uploadFromFile("c:/path/to/fileName.txt", "path/to/blob/");
+      </code>
+ </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>pathFileName</code> - Absolute path with file name.</dd>
@@ -286,7 +294,15 @@ extends java.lang.Object</pre>
                             throws java.net.URISyntaxException,
                                    com.microsoft.azure.storage.StorageException,
                                    java.io.IOException</pre>
-<div class="block">Upload a single file to the root of Azure container.</div>
+<div class="block">Upload a single file to the root of Azure container.
+ <p>
+  Example:
+ <pre>
+     <code>
+      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+      URI uri = blobUpload.uploadFromFile("c:/path/to/fileName.txt");
+      </code>
+ </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>pathFileName</code> - Absolute path with file name.</dd>
@@ -310,7 +326,15 @@ extends java.lang.Object</pre>
                               throws java.net.URISyntaxException,
                                      com.microsoft.azure.storage.StorageException,
                                      java.io.IOException</pre>
-<div class="block">Do a recursive upload of the folder path provided to a given blob path.</div>
+<div class="block">Do a recursive upload of the folder path provided to a given blob path.
+ <p>
+  Example:
+ <pre>
+     <code>
+      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+      URI uri = blobUpload.uploadFromFolder("c:/path/to/", "path/tp/blob/");
+      </code>
+ </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>folderPath</code> - Absolute path to a folder.</dd>
@@ -334,7 +358,15 @@ extends java.lang.Object</pre>
                               throws java.net.URISyntaxException,
                                      com.microsoft.azure.storage.StorageException,
                                      java.io.IOException</pre>
-<div class="block">Do a recursive upload of the folder path provided.</div>
+<div class="block">Do a recursive upload of the folder path provided.
+ <p>
+  Example:
+ <pre>
+     <code>
+      AzureBlobUpload blobUpload = new AzureBlobUpload("account name", "account key", "container name");
+      URI uri = blobUpload.uploadFromFolder("c:/path/to/");
+      </code>
+ </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>folderPath</code> - Absolute path to a folder.</dd>
@@ -373,7 +405,7 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gollahalli/azure/AzureBlobDownload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../com/gollahalli/azure/AzureBlobStreamWriter.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../com/gollahalli/azure/StorageUtils.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

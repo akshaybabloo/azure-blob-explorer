@@ -47,7 +47,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../com/gollahalli/azure/AzureBlobDelete.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../com/gollahalli/azure/AzureBlobStreamReader.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?com/gollahalli/azure/AzureBlobDownload.html" target="_top">Frames</a></li>
@@ -258,7 +258,15 @@ extends java.lang.Object</pre>
                               throws java.net.URISyntaxException,
                                      com.microsoft.azure.storage.StorageException,
                                      java.io.IOException</pre>
-<div class="block">Download a file from a given blob path of the container.</div>
+<div class="block">Download a file from a given blob path of the container.
+ <p>
+ Example:
+ <pre>
+     <code>
+     AzureBlobDownload blobDownload = new AzureBlobDownload("account name", "account key", "container name");
+     String path = blobDownload.downloadFile("blob/path/fileName.txt, "c:/path/to/folder/", false);
+     </code>
+ </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>blobPathFileName</code> - Path to the file name on the container.</dd>
@@ -283,7 +291,15 @@ extends java.lang.Object</pre>
                                 throws java.net.URISyntaxException,
                                        com.microsoft.azure.storage.StorageException,
                                        java.io.IOException</pre>
-<div class="block">Download a blob folder and its contents.</div>
+<div class="block">Download a blob folder and its contents.
+ <p>
+ Example:
+ <pre>
+     <code>
+     AzureBlobDownload blobDownload = new AzureBlobDownload("account name", "account key", "container name");
+     String path = blobDownload.downloadFile("blob/path/, "c:/path/to/folder/");
+     </code>
+ </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>blobFolderPath</code> - Folder path on the container to download.</dd>
@@ -309,7 +325,15 @@ extends java.lang.Object</pre>
                                 throws java.net.URISyntaxException,
                                        com.microsoft.azure.storage.StorageException,
                                        java.io.IOException</pre>
-<div class="block">Download a blob folder and its contents.</div>
+<div class="block">Download a blob folder and its contents.
+ <p>
+ Example:
+ <pre>
+     <code>
+     AzureBlobDownload blobDownload = new AzureBlobDownload("account name", "account key", "container name");
+     String path = blobDownload.downloadFile("blob/path/, "c:/path/to/folder/", false);
+     </code>
+ </pre></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>blobFolderPath</code> - Folder path on the container to download.</dd>
@@ -351,7 +375,7 @@ extends java.lang.Object</pre>
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../com/gollahalli/azure/AzureBlobDelete.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../com/gollahalli/azure/AzureBlobStreamReader.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?com/gollahalli/azure/AzureBlobDownload.html" target="_top">Frames</a></li>
