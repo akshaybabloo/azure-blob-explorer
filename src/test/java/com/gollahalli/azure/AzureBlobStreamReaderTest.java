@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StorageUtilsTest {
+class AzureBlobStreamReaderTest {
 
     @BeforeEach
     void setUp() {
@@ -17,30 +17,18 @@ class StorageUtilsTest {
     }
 
     @Test
-    void listContainers() {
+    void streamFileReader() {
     }
 
     @Test
-    void listContainers1() {
+    void streamFolderReader() {
     }
 
     @Test
-    void createContainer() {
+    void streamFolderReaderPair() {
     }
 
     @Test
-    void containerExists() {
-    }
-
-    @Test
-    void getRelativePaths() {
-    }
-
-    @Test
-    void listBlobs() {
-    }
-
-    @Test
-    void getBlobRelativePaths() {
+    void streamFolderReaderRegexPair() {
     }
 }
