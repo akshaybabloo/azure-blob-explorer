@@ -206,7 +206,7 @@ public class StorageUtils {
     }
 
     /**
-     * Just like {@link #getBlobRelativePaths} but instead of returning the local bath to store it returns the file name
+     * Just like {@link #getBlobRelativePaths} but instead of returning the local path to store it returns the file name
      * and blob paths.
      *
      * @param cloudBlobContainer {@link CloudBlobContainer} object.
