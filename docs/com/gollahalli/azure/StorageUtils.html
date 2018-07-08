@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -46,7 +46,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../com/gollahalli/azure/NaturalOrderComparator.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">StorageUtils</span>
 extends java.lang.Object</pre>
-<div class="block">Utilities for <a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><code>AzureBlobUpload</code></a>, <a href="../../../com/gollahalli/azure/AzureBlobDownload.html" title="class in com.gollahalli.azure"><code>AzureBlobDownload</code></a> and <a href="../../../com/gollahalli/azure/AzureBlobDelete.html" title="class in com.gollahalli.azure"><code>AzureBlobDelete</code></a>.</div>
+<div class="block">Utilities for <a href="../../../com/gollahalli/azure/AzureBlobDelete.html" title="class in com.gollahalli.azure"><code>AzureBlobDelete</code></a>, <a href="../../../com/gollahalli/azure/AzureBlobDownload.html" title="class in com.gollahalli.azure"><code>AzureBlobDownload</code></a>, <a href="../../../com/gollahalli/azure/AzureBlobStreamReader.html" title="class in com.gollahalli.azure"><code>AzureBlobStreamReader</code></a>, <a href="../../../com/gollahalli/azure/AzureBlobStreamWriter.html" title="class in com.gollahalli.azure"><code>AzureBlobStreamWriter</code></a> and <a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><code>AzureBlobUpload</code></a>.</div>
 </li>
 </ul>
 </div>
@@ -162,11 +162,21 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativeNames-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-boolean-">getBlobRelativeNames</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
                     java.lang.String&nbsp;blobFolderName,
                     boolean&nbsp;keepBlobName)</code>
-<div class="block">Just like <a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativePaths-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-java.lang.String-boolean-"><code>getBlobRelativePaths(com.microsoft.azure.storage.blob.CloudBlobContainer, java.lang.String, java.lang.String, boolean)</code></a> but instead of returning the local bath to store it returns the file name
+<div class="block">Just like <a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativePaths-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-java.lang.String-boolean-"><code>getBlobRelativePaths(com.microsoft.azure.storage.blob.CloudBlobContainer, java.lang.String, java.lang.String, boolean)</code></a> but instead of returning the local path to store it returns the file name
  and blob paths.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>static javafx.util.Pair&lt;java.util.List,java.util.List&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativeNames-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-boolean-java.lang.String-">getBlobRelativeNames</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
+                    java.lang.String&nbsp;blobFolderName,
+                    boolean&nbsp;keepBlobName,
+                    java.lang.String&nbsp;regex)</code>
+<div class="block">Just like <a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativePaths-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-java.lang.String-boolean-"><code>getBlobRelativePaths(com.microsoft.azure.storage.blob.CloudBlobContainer, java.lang.String, java.lang.String, boolean)</code></a> but instead of returning the local path to store it returns the file name
+ and blob paths.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static javafx.util.Pair&lt;java.util.List,java.util.List&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativePaths-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-java.lang.String-boolean-">getBlobRelativePaths</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
                     java.lang.String&nbsp;blobFolderName,
@@ -175,26 +185,26 @@ extends java.lang.Object</pre>
 <div class="block">Get all the blob paths with its respective local paths to save in.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static javafx.util.Pair&lt;java.util.List,java.util.List&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#getRelativePaths-java.lang.String-">getRelativePaths</a></span>(java.lang.String&nbsp;folderPath)</code>
 <div class="block">Returns the relative path of all the files in an absolute folder path.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#listBlobs-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-">listBlobs</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
          java.lang.String&nbsp;blobFolderName)</code>
 <div class="block">Lists all the contents in a blob recursively.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#listContainers-com.microsoft.azure.storage.blob.CloudBlobClient-">listContainers</a></span>(com.microsoft.azure.storage.blob.CloudBlobClient&nbsp;blobClient)</code>
 <div class="block">List all the containers in the account provided.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../com/gollahalli/azure/StorageUtils.html#listContainers-com.microsoft.azure.storage.blob.CloudBlobContainer-">listContainers</a></span>(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;container)</code>
 <div class="block">List all the containers in the account provided.</div>
@@ -367,19 +377,42 @@ extends java.lang.Object</pre>
 <a name="getBlobRelativeNames-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-boolean-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getBlobRelativeNames</h4>
 <pre>public static&nbsp;javafx.util.Pair&lt;java.util.List,java.util.List&gt;&nbsp;getBlobRelativeNames(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
                                                                                    java.lang.String&nbsp;blobFolderName,
                                                                                    boolean&nbsp;keepBlobName)</pre>
-<div class="block">Just like <a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativePaths-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-java.lang.String-boolean-"><code>getBlobRelativePaths(com.microsoft.azure.storage.blob.CloudBlobContainer, java.lang.String, java.lang.String, boolean)</code></a> but instead of returning the local bath to store it returns the file name
+<div class="block">Just like <a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativePaths-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-java.lang.String-boolean-"><code>getBlobRelativePaths(com.microsoft.azure.storage.blob.CloudBlobContainer, java.lang.String, java.lang.String, boolean)</code></a> but instead of returning the local path to store it returns the file name
  and blob paths.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>cloudBlobContainer</code> - <code>CloudBlobContainer</code> object.</dd>
 <dd><code>blobFolderName</code> - Blob folder path.</dd>
 <dd><code>keepBlobName</code> - Keep the root name of the folder.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A pair of list of <code>blobPath</code> and <code>folderFilePath</code>.</dd>
+</dl>
+</li>
+</ul>
+<a name="getBlobRelativeNames-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-boolean-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getBlobRelativeNames</h4>
+<pre>public static&nbsp;javafx.util.Pair&lt;java.util.List,java.util.List&gt;&nbsp;getBlobRelativeNames(com.microsoft.azure.storage.blob.CloudBlobContainer&nbsp;cloudBlobContainer,
+                                                                                   java.lang.String&nbsp;blobFolderName,
+                                                                                   boolean&nbsp;keepBlobName,
+                                                                                   java.lang.String&nbsp;regex)</pre>
+<div class="block">Just like <a href="../../../com/gollahalli/azure/StorageUtils.html#getBlobRelativePaths-com.microsoft.azure.storage.blob.CloudBlobContainer-java.lang.String-java.lang.String-boolean-"><code>getBlobRelativePaths(com.microsoft.azure.storage.blob.CloudBlobContainer, java.lang.String, java.lang.String, boolean)</code></a> but instead of returning the local path to store it returns the file name
+ and blob paths. You can also give a regular expression on the file names to sort what you want.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>cloudBlobContainer</code> - <code>CloudBlobContainer</code> object.</dd>
+<dd><code>blobFolderName</code> - Blob folder path.</dd>
+<dd><code>keepBlobName</code> - Keep the root name of the folder.</dd>
+<dd><code>regex</code> - Regular expression.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A pair of list of <code>blobPath</code> and <code>folderFilePath</code>.</dd>
 </dl>
@@ -411,7 +444,7 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../com/gollahalli/azure/AzureBlobUpload.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../com/gollahalli/azure/NaturalOrderComparator.html" title="class in com.gollahalli.azure"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
