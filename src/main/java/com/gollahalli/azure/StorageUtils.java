@@ -215,6 +215,20 @@ public class StorageUtils {
      * @return A pair of list of <code>blobPath</code> and <code>folderFilePath</code>.
      */
     public static Pair<List, List> getBlobRelativeNames(CloudBlobContainer cloudBlobContainer, String blobFolderName, boolean keepBlobName) {
+        return getBlobRelativeNames(cloudBlobContainer, blobFolderName, keepBlobName, null);
+    }
+
+    /**
+     * Just like {@link #getBlobRelativePaths} but instead of returning the local path to store it returns the file name
+     * and blob paths. You can also give a regular expression on the file names to sort what you want.
+     *
+     * @param cloudBlobContainer {@link CloudBlobContainer} object.
+     * @param blobFolderName     Blob folder path.
+     * @param keepBlobName       Keep the root name of the folder.
+     * @param regex              Regular expression.
+     * @return A pair of list of <code>blobPath</code> and <code>folderFilePath</code>.
+     */
+    public static Pair<List, List> getBlobRelativeNames(CloudBlobContainer cloudBlobContainer, String blobFolderName, boolean keepBlobName, String regex) {
         LOGGER.traceEntry();
         // TODO: Add custom pairs.
         List<String> blobPath = new ArrayList<>();
@@ -244,6 +258,29 @@ public class StorageUtils {
             LOGGER.error(e.getStackTrace());
         }
 
-        return new Pair<>(blobPath, folderFilePath);
+        Pair<List, List> nameAndPath = new Pair<>(blobPath, folderFilePath);
+
+        if (regex != null) {
+            LOGGER.debug("regex: {}", regex);
+
+            List<String> matchedNames = new ArrayList<>();
+            List<String> matchedBlobPaths = new ArrayList<>();
+
+            for (int i = 0; i < nameAndPath.getKey().size(); i++) {
+                if (FilenameUtils.getName((String) nameAndPath.getKey().get(i)).matches(regex)) {
+                    matchedNames.add(FilenameUtils.getName((String) nameAndPath.getKey().get(i)));
+                    matchedBlobPaths.add((String) nameAndPath.getValue().get(i));
+                }
+            }
+
+            matchedNames.sort(new NaturalOrderComparator());
+            matchedBlobPaths.sort(new NaturalOrderComparator());
+
+            LOGGER.traceExit();
+            return new Pair<>(matchedBlobPaths, matchedNames);
+        }
+
+        LOGGER.traceExit();
+        return nameAndPath;
     }
 }
