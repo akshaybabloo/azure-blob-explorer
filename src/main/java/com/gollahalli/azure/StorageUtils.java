@@ -201,6 +201,7 @@ public class StorageUtils {
             LOGGER.error(e.getStackTrace());
         }
 
+        LOGGER.traceExit();
         return new Pair<>(blobPath, folderFilePath);
     }
 
