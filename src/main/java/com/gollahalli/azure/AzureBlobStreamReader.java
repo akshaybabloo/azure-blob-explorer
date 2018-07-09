@@ -237,7 +237,7 @@ public class AzureBlobStreamReader {
      * <pre>
      *     {@code
      *     AzureBlobStreamReader streamReader = new AzureBlobStreamReader("account name", "account key", "container name");
-     *     Pair<List<String>, List<InputStreamReader>> reader = streamFolderReader.streamFolderReaderPair("path/to/folder");
+     *     Pair<List<String>, List<InputStreamReader>> reader = streamFolderReader.streamFolderReaderPair("regex");
      *     }
      * </pre>
      *
